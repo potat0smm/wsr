@@ -48,5 +48,23 @@
         android:id="@+id/passwordFragment"
         android:name="com.example.wsr.Verification.PasswordFragment"
         android:label="fragment_password"
-        tools:layout="@layout/fragment_password" />
+        tools:layout="@layout/fragment_password" >
+        <action
+            android:id="@+id/action_passwordFragment_to_createUser"
+            app:destination="@id/createUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/createUser"
+        android:name="com.example.wsr.CreateUser.CreateUser"
+        android:label="fragment_create_user"
+        tools:layout="@layout/fragment_create_user" >
+        <action
+            android:id="@+id/action_createUser_to_menuFragment2"
+            app:destination="@id/menuFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment2"
+        android:name="com.example.wsr.MainMenu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" />
 </navigation>

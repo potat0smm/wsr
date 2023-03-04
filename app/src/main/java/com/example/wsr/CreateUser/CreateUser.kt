@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.navigation.fragment.findNavController
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCreateUserBinding
 
@@ -28,7 +29,9 @@ class CreateUser : Fragment() {
         val arrayAddapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu,maleFemale)
         binding.autoComplete.setAdapter(arrayAddapter)
 
-
+        binding.add.setOnClickListener {
+            findNavController().navigate(R.id.action_createUser_to_menuFragment2)
+        }
 
         return binding.root
     }
