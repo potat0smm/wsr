@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/analyzes"
+        android:icon="@drawable/baseline_done_24"
+        android:iconTint="@color/black"
+        android:title="Анализы"/>
+    <item
+        android:id="@+id/result"
+        android:icon="@drawable/baseline_done_24"
+        android:iconTint="@color/black"
+        android:title="Результаты"/>
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/baseline_done_24"
+        android:iconTint="@color/black"
+        android:title="Поддержка"/>
+    <item
+        android:id="@+id/profil"
+        android:icon="@drawable/baseline_done_24"
+        android:iconTint="@color/black"
+        android:title="Профиль"/>
+</menu>
