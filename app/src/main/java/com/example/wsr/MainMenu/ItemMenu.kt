@@ -1,5 +1,7 @@
 package com.example.wsr.MainMenu
 
 data class ItemMenu(
-    val name: String
+    val first_name: String,
+    val title_first: String,
+    val price_first: String,
 )

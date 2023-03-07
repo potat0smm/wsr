@@ -3,28 +3,36 @@ package com.example.wsr.MainMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wsr.R
 
-class MenuAdapter(private val menuLsit: List<ItemMenu>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>(){
+class MenuAdapter(private val menuList: List<ItemMenu>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>(){
 
     class MenuViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-        val name: TextView = itemView.findViewById(R.id.test)
+        val firstName: TextView = itemView.findViewById(R.id.first_name)
+        val firstTitle: TextView = itemView.findViewById(R.id.title_first)
+        val firstPrice: TextView = itemView.findViewById(R.id.price_first)
+       // val firstImg: ImageView = itemView.findViewById<ImageView>(R.id.img_first)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_firs_recycler_view,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_first_recycler_view,parent,false)
         return MenuViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return menuLsit.size
+        return menuList.size
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-        val item = menuLsit[position]
-        holder.name.text = item.name
+        val item = menuList[position]
+        holder.firstName.text = item.first_name
+        holder.firstTitle.text = item.title_first
+        holder.firstPrice.text = item.price_first
     }
 
 }

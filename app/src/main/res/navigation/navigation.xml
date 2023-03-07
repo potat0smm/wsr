@@ -66,5 +66,14 @@
         android:id="@+id/menuFragment2"
         android:name="com.example.wsr.MainMenu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment2_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.example.wsr.MainMenu.BottomSheet.BottomSheet"
+        android:label=""
+        tools:layout="@layout/fragment_bottom_sheet"/>
 </navigation>

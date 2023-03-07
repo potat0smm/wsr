@@ -11,7 +11,7 @@ import com.example.wsr.R
 class MenuAdapterSecond(private val menuSecondList: List<ItemMenuSecond>):RecyclerView.Adapter<MenuAdapterSecond.SecondMenuViewHolder>(){
 
     class SecondMenuViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-        val name: TextView = itemView.findViewById(R.id.test2)
+        val nameSecond: TextView = itemView.findViewById(R.id.name_second)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SecondMenuViewHolder {
@@ -25,7 +25,7 @@ class MenuAdapterSecond(private val menuSecondList: List<ItemMenuSecond>):Recycl
 
     override fun onBindViewHolder(holder: SecondMenuViewHolder, position: Int) {
         val item = menuSecondList[position]
-        holder.name.text = item.name
+        holder.nameSecond.text = item.name
     }
 
 

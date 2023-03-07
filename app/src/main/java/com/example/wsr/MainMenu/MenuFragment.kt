@@ -1,10 +1,14 @@
 package com.example.wsr.MainMenu
 
+import android.content.ClipData.Item
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -13,6 +17,7 @@ import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide.init
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentMenuBinding
+import com.google.android.material.button.MaterialButton
 
 
 class MenuFragment : Fragment() {
@@ -30,6 +35,8 @@ class MenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,10 +44,27 @@ class MenuFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
 
+
+
         init()
         initSecond()
         initThird()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+       binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener{
+           findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
+       }
+
+
+
+
+       //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener {
+         // findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
+       //}
     }
 
     private fun initThird() {
@@ -53,16 +77,19 @@ class MenuFragment : Fragment() {
 
         thirdMenuAdapter = MenuAdapterThird(thirdItemList)
         recyclerView.adapter = thirdMenuAdapter
+
+
     }
 
     private fun addDataListThird() {
-        thirdItemList.add(ItemMenuThird("test0"))
-        thirdItemList.add(ItemMenuThird("test1"))
-        thirdItemList.add(ItemMenuThird("test2"))
-        thirdItemList.add(ItemMenuThird("test3"))
-        thirdItemList.add(ItemMenuThird("test4"))
-        thirdItemList.add(ItemMenuThird("test5"))
-        thirdItemList.add(ItemMenuThird("test6"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+        thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
+
     }
 
     private fun initSecond() {
@@ -79,13 +106,11 @@ class MenuFragment : Fragment() {
     }
 
     private fun addDataListSecond() {
-        secondItemList.add(ItemMenuSecond("test0"))
-        secondItemList.add(ItemMenuSecond("test1"))
-        secondItemList.add(ItemMenuSecond("test2"))
-        secondItemList.add(ItemMenuSecond("test3"))
-        secondItemList.add(ItemMenuSecond("test4"))
-        secondItemList.add(ItemMenuSecond("test5"))
-        secondItemList.add(ItemMenuSecond("test6"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
     }
 
     private fun init() {
@@ -105,8 +130,13 @@ class MenuFragment : Fragment() {
 
 
     private fun addDataList() {
-        itemlist.add(ItemMenu("test0"))
-        itemlist.add(ItemMenu("test1"))
+        itemlist.add(ItemMenu("Чек-ап для\nмужчин","9 исследований","8000 ₽"))
+        itemlist.add(ItemMenu("Подготовка к\nвакцинации","Комплексное обследование\nперед вакцинацией","4000 ₽"))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

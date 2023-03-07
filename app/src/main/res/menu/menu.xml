@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/analyzes"
-        android:icon="@drawable/baseline_done_24"
+        android:icon="@drawable/analyz"
         android:iconTint="@color/black"
         android:title="Анализы"/>
     <item
         android:id="@+id/result"
-        android:icon="@drawable/baseline_done_24"
+        android:icon="@drawable/result"
         android:iconTint="@color/black"
         android:title="Результаты"/>
     <item
         android:id="@+id/help"
-        android:icon="@drawable/baseline_done_24"
+        android:icon="@drawable/help"
         android:iconTint="@color/black"
         android:title="Поддержка"/>
     <item
         android:id="@+id/profil"
-        android:icon="@drawable/baseline_done_24"
+        android:icon="@drawable/profil"
         android:iconTint="@color/black"
         android:title="Профиль"/>
 </menu>
