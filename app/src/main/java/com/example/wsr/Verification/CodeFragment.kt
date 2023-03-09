@@ -2,6 +2,7 @@ package com.example.wsr.Verification
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -13,6 +14,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
@@ -21,20 +24,139 @@ import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCodeBinding
 
 
-@Suppress("DEPRECATION")
-class CodeFragment : Fragment() {
+@Suppress("DEPRECATION", "UNREACHABLE_CODE")
+class CodeFragment : Fragment(R.layout.fragment_code) {
+
+    companion object{
+        private const val TEST_VERIFY_CODE = "1111"
+    }
+
+    private val frameLayoutRoot: FrameLayout by lazy {
+        frameLayoutRoot
+    }
+
+    private val editTextOne: EditText by lazy{
+        binding.OTP1
+    }
+    private val editTextTwo: EditText by lazy {
+        binding.OTP2
+    }
+    private val editTextThree: EditText by lazy {
+        binding.OTP4
+    }
+    private val editTextFour: EditText by lazy {
+        binding.OTP3
+    }
 
     private var _binding: FragmentCodeBinding? = null
     private val binding get() = _binding!!
 
 
 
-        //binding.OTP1.isEnabled = true
+    private fun setListener() {
+     frameLayoutRoot.setOnClickListener {
+         val inputManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+         inputManager.hideSoftInputFromWindow(frameLayoutRoot.windowToken,0)
+     }
+        setTextChangeListener(fromEditText = editTextOne, targerEditText = editTextTwo)
+        setTextChangeListener(fromEditText = editTextTwo, targerEditText = editTextThree)
+        setTextChangeListener(fromEditText = editTextThree, targerEditText = editTextFour)
+        setTextChangeListener(fromEditText = editTextFour, done = {
+            verifyOTPCode()
+        })
+        setKeyListener(fromEditText = editTextTwo, backToEditText = editTextOne)
+        setKeyListener(fromEditText = editTextThree, backToEditText = editTextTwo)
+        setKeyListener(fromEditText = editTextFour, backToEditText = editTextThree)
+    }
+        private fun initFocus(){
+            editTextOne.isEnabled = true
 
-        //binding.OTP1.postDelayed({
+            editTextOne.postDelayed({
+                editTextOne.requestFocus()
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            },500)
+        }
+
+    private fun getSystemService(inputMethodService: String): Any {
+        null!!
+    }
+    private fun reset(){
+        editTextOne.isEnabled = false
+        editTextTwo.isEnabled = false
+        editTextThree.isEnabled = false
+        editTextFour.isEnabled = false
+
+        editTextOne.setText("")
+        editTextTwo.setText("")
+        editTextThree.setText("")
+        editTextFour.setText("")
+
+        initFocus()
+    }
+
+    private fun setTextChangeListener(
+        fromEditText: EditText,
+        targerEditText: EditText? = null,
+        done: (() -> Unit)? = null
+    ){
+        fromEditText.addTextChangedListener {
+            it?.let {string ->
+                if(string.isNotEmpty()){
+                    targerEditText?.let {editText ->
+                        editText.isEnabled =true
+                        editText.requestFocus()
+                    }?: run{
+                        done?.let { done ->
+                            done()
+                        }
+                    }
+                    fromEditText.clearFocus()
+                    fromEditText.isEnabled = false
+                }
+
+            }
+        }
+    }
+    private fun setKeyListener(fromEditText: EditText,backToEditText:EditText){
+        fromEditText.setOnKeyListener{ _, _, event ->
+            if (null != event && KeyEvent.KEYCODE_DEL == event.keyCode){
+                backToEditText.isEnabled = true
+                backToEditText.requestFocus()
+                backToEditText.setText("")
+
+                fromEditText.clearFocus()
+                fromEditText.isEnabled = false
+            }
+            false
+        }
+    }
+    private fun verifyOTPCode(){
+        val otpCode = "${editTextOne.text.toString().trim()}"+
+                "${editTextTwo.text.toString().trim()}"+
+                "${editTextThree.text.toString().trim()}"+
+                "${editTextFour.text.toString().trim()}"
+        if (4 != otpCode.length){
+            return
+        }
+        if (otpCode == TEST_VERIFY_CODE){
+            findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
+
+            val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(frameLayoutRoot.windowToken,0)
+
+            return
+        }
+        reset()
+
+    }
+
+
+    //binding.OTP1.postDelayed({
           //  binding.OTP1.requestFocus()
             //val inputMethodManager = getSystemService()
         //},500)
+
+
 
 
     override fun onCreateView(
@@ -46,36 +168,15 @@ class CodeFragment : Fragment() {
         binding.backToEmailFragment.setOnClickListener{
             findNavController().navigate(R.id.action_codeFragment_to_emailFragment)
         }
+        setListener()
+
+        initFocus()
+
         binding.goNewPassword.setOnClickListener {
             findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
         }
         return binding.root
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

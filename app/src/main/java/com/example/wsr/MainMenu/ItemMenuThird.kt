@@ -4,6 +4,6 @@ data class ItemMenuThird(
     val name:String,
     val day: String,
     val price: String,
-    val image:String
+    //val add:String
 )
 

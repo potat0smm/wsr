@@ -55,6 +55,7 @@
             android:gravity="center"
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
+            android:textCursorDrawable="@null"
             android:maxLength="1"
             android:maxLines="1" />
 
@@ -68,6 +69,7 @@
             android:ems="10"
             android:enabled="false"
             android:gravity="center"
+            android:textCursorDrawable="@null"
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
             android:maxLength="1"
@@ -82,6 +84,7 @@
             android:cursorVisible="false"
             android:ems="10"
             android:enabled="false"
+            android:textCursorDrawable="@null"
             android:gravity="center"
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
@@ -100,6 +103,7 @@
             android:gravity="center"
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
+            android:textCursorDrawable="@null"
             android:maxLength="1"
             android:maxLines="1" />
 
