@@ -78,6 +78,10 @@ class MenuFragment : Fragment() {
         thirdMenuAdapter = MenuAdapterThird(thirdItemList)
         recyclerView.adapter = thirdMenuAdapter
 
+        binding.searchview.setOnClickListener{
+            findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
+        }
+
 
     }
 

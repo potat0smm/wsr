@@ -24,7 +24,7 @@ class MenuAdapterThird(private val menuThirdList: List<ItemMenuThird>):RecyclerV
 
     // val image: ImageView = itemView.findViewById(R.id.add_menu)
 
-      // val add:MaterialButton = itemView.findViewById(R.id.add_menu)
+       val add:MaterialButton = itemView.findViewById(R.id.add_menu)
 
     }
 
@@ -42,6 +42,9 @@ class MenuAdapterThird(private val menuThirdList: List<ItemMenuThird>):RecyclerV
         holder.name.text = item.name
         holder.day.text = item.day
         holder.price.text = item.price
+        holder.add.setOnClickListener {
+            BottomSheet()
+        }
 
     }
 }
