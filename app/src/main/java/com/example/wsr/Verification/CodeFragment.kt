@@ -26,6 +26,8 @@ import com.example.wsr.databinding.FragmentCodeBinding
 
 class CodeFragment : Fragment(R.layout.fragment_code) {
 
+
+
     private var _binding: FragmentCodeBinding? = null
     private val binding get() = _binding!!
 
@@ -42,7 +44,16 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         binding.goNewPassword.setOnClickListener {
             findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
         }
+
+        binding.OTP1.addTextChangedListener()
+        binding.OTP2.addTextChangedListener()
+        binding.OTP4.addTextChangedListener()
+        binding.OTP3.addTextChangedListener()
+
+
         return binding.root
+
+
     }
 
 }

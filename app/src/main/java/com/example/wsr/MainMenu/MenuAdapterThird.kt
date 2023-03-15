@@ -1,15 +1,11 @@
 package com.example.wsr.MainMenu
 
-import android.content.Intent
-import android.location.GnssAntennaInfo.Listener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wsr.MainMenu.BottomSheet.BottomSheet
 import com.example.wsr.R
 import com.google.android.material.button.MaterialButton
 
@@ -42,9 +38,11 @@ class MenuAdapterThird(private val menuThirdList: List<ItemMenuThird>):RecyclerV
         holder.name.text = item.name
         holder.day.text = item.day
         holder.price.text = item.price
-        holder.add.setOnClickListener {
-            BottomSheet()
+        holder.itemView.setOnClickListener{view->
+            val ai = MenuFragmentDirections.actionMenuFragment2ToBottomSheet()
+            view.findNavController().navigate(ai)
         }
 
     }
+
 }

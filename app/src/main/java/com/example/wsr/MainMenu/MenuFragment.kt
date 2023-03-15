@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide.init
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentMenuBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 
@@ -47,15 +48,18 @@ class MenuFragment : Fragment() {
         init()
         initSecond()
         initThird()
+
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.bottomNav.findViewById<ImageView>(R.id.profil).setOnClickListener{
-            findNavController().navigate(R.id.action_menuFragment2_to_userFragment)
-        }
+
+
+
     }
 
     private fun initThird() {
@@ -69,9 +73,7 @@ class MenuFragment : Fragment() {
         thirdMenuAdapter = MenuAdapterThird(thirdItemList)
         recyclerView.adapter = thirdMenuAdapter
 
-        binding.searchview.setOnClickListener{
-            findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
-        }
+
 
 
     }

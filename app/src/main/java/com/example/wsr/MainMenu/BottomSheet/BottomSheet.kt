@@ -33,6 +33,10 @@ class BottomSheet : BottomSheetDialogFragment() {
             findNavController().popBackStack(R.id.menuFragment2,false)
         }
 
+        binding.close.setOnClickListener{
+            findNavController().popBackStack(R.id.menuFragment2,false)
+        }
+
         return binding.root
     }
 

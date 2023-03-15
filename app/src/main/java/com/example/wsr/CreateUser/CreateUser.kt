@@ -26,8 +26,8 @@ class CreateUser : Fragment() {
         _binding = FragmentCreateUserBinding.inflate(inflater, container, false)
 
         val maleFemale = resources.getStringArray(R.array.MaleFemale)
-        val arrayAddapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu,maleFemale)
-        binding.autoComplete.setAdapter(arrayAddapter)
+        val arrayAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu,maleFemale)
+        binding.autoComplete.setAdapter(arrayAdapter)
 
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_createUser_to_menuFragment2)
