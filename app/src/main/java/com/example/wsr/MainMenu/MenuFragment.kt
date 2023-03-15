@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
@@ -43,9 +44,6 @@ class MenuFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
-
-
-
         init()
         initSecond()
         initThird()
@@ -55,16 +53,9 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener{
-         //  findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
-       //}
-
-
-
-
-       //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener {
-         // findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
-       //}
+        binding.bottomNav.findViewById<ImageView>(R.id.profil).setOnClickListener{
+            findNavController().navigate(R.id.action_menuFragment2_to_userFragment)
+        }
     }
 
     private fun initThird() {
