@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".User.UserFragment">
 
+
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:src="@drawable/img_1"
+        android:src="@drawable/test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -61,7 +62,8 @@
         android:background="@drawable/edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/textView29"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/user_patronymic"
@@ -93,15 +95,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_surname" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
         android:layout_width="350dp"
         android:layout_height="45dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/edit_text"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_day_birthday" />
+        app:layout_constraintTop_toBottomOf="@+id/user_day_birthday">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text"
+            android:hint="Пол"
+            android:paddingLeft="10dp"
+            android:inputType="none"
+            android:textColor="#808080"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_user"
@@ -115,7 +132,7 @@
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

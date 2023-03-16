@@ -76,12 +76,19 @@
         <action
             android:id="@+id/action_menuFragment2_to_itemBasket"
             app:destination="@id/itemBasket" />
+        <action
+            android:id="@+id/action_menuFragment2_to_bottomSheetGoBasket"
+            app:destination="@id/bottomSheetGoBasket" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheet"
         android:name="com.example.wsr.MainMenu.BottomSheet.BottomSheet"
         android:label=""
-        tools:layout="@layout/fragment_bottom_sheet"/>
+        tools:layout="@layout/fragment_bottom_sheet">
+        <action
+            android:id="@+id/action_bottomSheet_to_bottomSheetGoBasket"
+            app:destination="@id/bottomSheetGoBasket" />
+    </dialog>
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.wsr.User.UserFragment"
@@ -92,4 +99,9 @@
         android:name="com.example.wsr.basket.ItemBasket"
         android:label="fragment_item_basket"
         tools:layout="@layout/fragment_item_basket" />
+    <dialog
+        android:id="@+id/bottomSheetGoBasket"
+        android:name="com.example.wsr.MainMenu.BottomSheet.BottomSheetGoBasket"
+        android:label="fragment_bottom_sheet_go_basket"
+        tools:layout="@layout/fragment_bottom_sheet_go_basket" />
 </navigation>

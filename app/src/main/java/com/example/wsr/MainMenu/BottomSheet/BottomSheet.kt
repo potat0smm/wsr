@@ -10,7 +10,7 @@ import com.example.wsr.R
 import com.example.wsr.databinding.FragmentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheet : BottomSheetDialogFragment() {
+open class BottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +31,11 @@ class BottomSheet : BottomSheetDialogFragment() {
 
         binding.save.setOnClickListener {
             findNavController().popBackStack(R.id.menuFragment2,false)
+            //findNavController().navigate(R.id.action_bottomSheet_to_bottomSheetGoBasket)
+
         }
+
+
 
         binding.close.setOnClickListener{
             findNavController().popBackStack(R.id.menuFragment2,false)

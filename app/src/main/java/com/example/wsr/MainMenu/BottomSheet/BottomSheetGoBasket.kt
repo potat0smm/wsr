@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.wsr.R
 
 
-class BottomSheetGoBasket : Fragment() {
+class BottomSheetGoBasket : BottomSheet() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

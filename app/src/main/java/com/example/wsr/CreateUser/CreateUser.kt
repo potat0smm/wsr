@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCreateUserBinding
@@ -31,6 +35,16 @@ class CreateUser : Fragment() {
 
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_createUser_to_menuFragment2)
+        }
+
+        val items = listOf("Мужчина", "Девушка")
+        val autoComplete: AutoCompleteTextView = binding.autoComplete
+        val adapter = ArrayAdapter(requireContext(),R.layout.item_for_auto_complete,items)
+
+        autoComplete.setAdapter(adapter)
+
+        autoComplete.onItemClickListener = AdapterView.OnItemClickListener{ adapterView, view, i, l ->
+            adapterView.getItemAtPosition(i)
         }
 
         return binding.root

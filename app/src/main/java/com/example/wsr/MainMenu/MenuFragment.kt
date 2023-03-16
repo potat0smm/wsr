@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide.init
 import com.example.wsr.R
+import com.example.wsr.User.UserFragment
 import com.example.wsr.databinding.FragmentMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
@@ -37,6 +38,7 @@ class MenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
+    private val profil = UserFragment()
 
 
     override fun onCreateView(
@@ -56,8 +58,6 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
 
     }
@@ -104,10 +104,10 @@ class MenuFragment : Fragment() {
 
     private fun addDataListSecond() {
         secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Covid"))
+        secondItemList.add(ItemMenuSecond("Комплексные"))
+        secondItemList.add(ItemMenuSecond("ТЕСТ"))
+        secondItemList.add(ItemMenuSecond("ТЕСТ"))
     }
 
     private fun init() {

@@ -40,7 +40,11 @@ class MenuAdapterThird(private val menuThirdList: List<ItemMenuThird>):RecyclerV
         holder.price.text = item.price
         holder.itemView.setOnClickListener{view->
             val ai = MenuFragmentDirections.actionMenuFragment2ToBottomSheet()
-            view.findNavController().navigate(ai)
+            view.findNavController().navigate(ai) 
+        }
+        holder.add.setOnClickListener {view->
+            val ik = MenuFragmentDirections.actionMenuFragment2ToBottomSheetGoBasket()
+            view.findNavController().navigate(ik)
         }
 
     }
