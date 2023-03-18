@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
@@ -17,9 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide.init
 import com.example.wsr.R
-import com.example.wsr.User.UserFragment
 import com.example.wsr.databinding.FragmentMenuBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 
@@ -38,7 +35,6 @@ class MenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
-    private val profil = UserFragment()
 
 
     override fun onCreateView(
@@ -47,19 +43,28 @@ class MenuFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
+
+
+
         init()
         initSecond()
         initThird()
-
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener{
+           findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
+       }
 
+
+
+
+       //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener {
+         // findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
+       //}
     }
 
     private fun initThird() {
@@ -72,8 +77,6 @@ class MenuFragment : Fragment() {
 
         thirdMenuAdapter = MenuAdapterThird(thirdItemList)
         recyclerView.adapter = thirdMenuAdapter
-
-
 
 
     }
@@ -104,10 +107,10 @@ class MenuFragment : Fragment() {
 
     private fun addDataListSecond() {
         secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Covid"))
-        secondItemList.add(ItemMenuSecond("Комплексные"))
-        secondItemList.add(ItemMenuSecond("ТЕСТ"))
-        secondItemList.add(ItemMenuSecond("ТЕСТ"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Популярный"))
     }
 
     private fun init() {

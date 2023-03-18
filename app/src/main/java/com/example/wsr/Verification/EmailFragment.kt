@@ -57,7 +57,7 @@ class EmailFragment : Fragment() {
     }
     private fun signUp(){
         binding.materialButton.isEnabled = false
-        binding.editText.addTextChangedListener {
+         binding.editText.addTextChangedListener {
             val email = binding.editText.text.toString()
             var status = false
             if (email.isNotEmpty())

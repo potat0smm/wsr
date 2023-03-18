@@ -4,8 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,10 +31,13 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 
+@Suppress("DEPRECATION")
 class CodeFragment : Fragment(R.layout.fragment_code) {
 
-    private lateinit var inputEditTexts: List<TextInputEditText>
-    private lateinit var inputLayouts: List<TextInputLayout>
+    private lateinit var edit1:EditText
+    private lateinit var edit2:EditText
+    private lateinit var edit3:EditText
+    private lateinit var edit4:EditText
 
     private var _binding: FragmentCodeBinding? = null
     private val binding get() = _binding!!
@@ -48,32 +55,67 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         binding.goNewPassword.setOnClickListener {
             findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
         }
-        isInputValid()
+        //isInputValid()
 
-        inputLayouts = listOf(
-        )
+        edit1 = binding.OTP1
+        edit2 = binding.OTP2
+        edit3 = binding.OTP4
+        edit4 = binding.OTP3
+
+
+        setEditTextListener(edit1)
+        setEditTextListener(edit2)
+        setEditTextListener(edit3)
+        setEditTextListener(edit4)
+
 
 
         return binding.root
 
 
     }
-    private fun isInputValid(): Boolean{
-        val input1 = binding.OTP1.text.toString().trim()
-        val input2 = binding.OTP2.text.toString().trim()
-        val input3 = binding.OTP4.text.toString().trim()
-        val input4 = binding.OTP3.text.toString().trim()
+    private fun setEditTextListener(editText: EditText){
+        editText.addTextChangedListener (object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        if(input1.isEmpty()|| input2.isEmpty()|| input3.isEmpty()||input4.isEmpty()){
-            return false
-        }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-        if(!TextUtils.isDigitsOnly(input1)|| !TextUtils.isDigitsOnly(input2)||!TextUtils.isDigitsOnly(input3)|| !TextUtils.isDigitsOnly(input4)){
-            return false
-        }
-        return true
+            override fun afterTextChanged(s: Editable?) {
+                if(s.isNullOrEmpty()){
+                    editText.background.clearColorFilter()
+                }
+                else{
+                    editText.background.setColorFilter(Color.BLUE,PorterDuff.Mode.SRC_ATOP)
+                }
+                chekAllEditTextFilled()
+            }
 
+        })
     }
+
+    private fun chekAllEditTextFilled() {
+        if (edit1.text.isNotEmpty()&&edit2.text.isNotEmpty()&&edit3.text.isNotEmpty()&&edit4.text.isNotEmpty()){
+            findNavController().navigate(R.id.action_passwordFragment_to_createUser)
+        }
+    }
+
+
+    /* private fun isInputValid(): Boolean{
+         val input1 = binding.OTP1.text.toString().trim()
+         val input2 = binding.OTP2.text.toString().trim()
+         val input3 = binding.OTP4.text.toString().trim()
+         val input4 = binding.OTP3.text.toString().trim()
+
+         if(input1.isEmpty()|| input2.isEmpty()|| input3.isEmpty()||input4.isEmpty()){
+             return false
+         }
+
+         if(!TextUtils.isDigitsOnly(input1)|| !TextUtils.isDigitsOnly(input2)||!TextUtils.isDigitsOnly(input3)|| !TextUtils.isDigitsOnly(input4)){
+             return false
+         }
+         return true
+
+     }*/
 
 }
 /*
