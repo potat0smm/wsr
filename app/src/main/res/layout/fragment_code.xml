@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+ <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -89,8 +89,7 @@
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
             android:maxLength="1"
-            android:maxLines="1" />
-
+            android:maxLines="1"/>
         <EditText
             android:id="@+id/OTP4"
             android:layout_width="45dp"

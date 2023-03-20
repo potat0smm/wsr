@@ -55,9 +55,7 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener{
-           findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
-       }
+
 
 
 
