@@ -55,47 +55,41 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         binding.goNewPassword.setOnClickListener {
             findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
         }
-        //isInputValid()
 
         edit1 = binding.OTP1
         edit2 = binding.OTP2
         edit3 = binding.OTP4
         edit4 = binding.OTP3
 
-
-        setEditTextListener(edit1)
-        setEditTextListener(edit2)
-        setEditTextListener(edit3)
-        setEditTextListener(edit4)
-
-
-
         return binding.root
-
-
     }
-    private fun setEditTextListener(editText: EditText){
-        editText.addTextChangedListener (object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    private fun setUpEditText(){
+        edit1.addTextChangedListener(GenericTextWatcher(edit1,edit2))
+        edit1.addTextChangedListener(GenericTextWatcher(edit2,edit3))
+        edit1.addTextChangedListener(GenericTextWatcher(edit3,edit4))
+        edit1.addTextChangedListener(GenericTextWatcher(edit4,null))
+    }
 
-            override fun afterTextChanged(s: Editable?) {
-                if(s.isNullOrEmpty()){
-                    editText.background.clearColorFilter()
-                }
-                else{
-                    editText.background.setColorFilter(Color.BLUE,PorterDuff.Mode.SRC_ATOP)
-                }
-                chekAllEditTextFilled()
+    inner class GenericTextWatcher(private val currentView:View,
+                                   private val nextView:View?) : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(etitable: Editable) {
+            val text = etitable.toString()
+            if (text.length == 1 && nextView != null){
+                nextView.requestFocus()
             }
-
-        })
-    }
-
-    private fun chekAllEditTextFilled() {
-        if (edit1.text.isNotEmpty()&&edit2.text.isNotEmpty()&&edit3.text.isNotEmpty()&&edit4.text.isNotEmpty()){
-            findNavController().navigate(R.id.action_passwordFragment_to_createUser)
+            if (edit1.text.toString().isNotEmpty()&&
+                    edit2.text.toString().isNotEmpty()&&
+                    edit3.text.toString().isNotEmpty()&&
+                    edit4.text.toString().isNotEmpty()
+            )
+                findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
         }
     }
 

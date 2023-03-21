@@ -73,8 +73,7 @@
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
             android:maxLength="1"
-            android:maxLines="1" />
-
+            android:maxLines="1"/>
         <EditText
             android:id="@+id/OTP3"
             android:layout_width="45dp"
