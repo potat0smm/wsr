@@ -20,6 +20,7 @@ import com.example.wsr.databinding.FragmentMenuBinding
 import com.google.android.material.button.MaterialButton
 
 
+@Suppress("DEPRECATION")
 class MenuFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -50,7 +51,16 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        /*binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.analyzes ->{
+                   childFragmentManager.beginTransaction()
+                       .replace(R.id.fragmentContainerView,null)
+                       .commit()
+                    true
+                }
+            }
+        }*/
 
 
        //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener {
