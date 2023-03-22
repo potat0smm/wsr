@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -51,7 +51,6 @@
             android:background="@drawable/background_code_verif"
             android:cursorVisible="false"
             android:ems="10"
-            android:enabled="false"
             android:gravity="center"
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
@@ -67,7 +66,6 @@
             android:background="@drawable/background_code_verif"
             android:cursorVisible="false"
             android:ems="10"
-            android:enabled="false"
             android:gravity="center"
             android:textCursorDrawable="@null"
             android:imeOptions="actionNone"
@@ -82,7 +80,6 @@
             android:background="@drawable/background_code_verif"
             android:cursorVisible="false"
             android:ems="10"
-            android:enabled="false"
             android:textCursorDrawable="@null"
             android:gravity="center"
             android:imeOptions="actionNone"
@@ -97,25 +94,22 @@
             android:background="@drawable/background_code_verif"
             android:cursorVisible="false"
             android:ems="10"
-            android:enabled="false"
             android:gravity="center"
             android:imeOptions="actionNone"
             android:inputType="numberDecimal"
             android:textCursorDrawable="@null"
             android:maxLength="1"
             android:maxLines="1" />
-
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/go_new_password"
+    <TextView
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

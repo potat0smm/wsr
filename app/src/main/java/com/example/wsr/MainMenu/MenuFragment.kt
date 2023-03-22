@@ -35,8 +35,6 @@ class MenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,18 +42,13 @@ class MenuFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
 
-
-
         init()
         initSecond()
         initThird()
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
 
 
@@ -75,10 +68,7 @@ class MenuFragment : Fragment() {
 
         thirdMenuAdapter = MenuAdapterThird(thirdItemList)
         recyclerView.adapter = thirdMenuAdapter
-
-
     }
-
     private fun addDataListThird() {
         thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
         thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
@@ -89,7 +79,6 @@ class MenuFragment : Fragment() {
         thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽"))
 
     }
-
     private fun initSecond() {
         recyclerView = binding.secondRecyclerView
         recyclerView.setHasFixedSize(true)
@@ -102,15 +91,13 @@ class MenuFragment : Fragment() {
         recyclerView.adapter = secondMenuAdapter
 
     }
-
     private fun addDataListSecond() {
         secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
-        secondItemList.add(ItemMenuSecond("Популярный"))
+        secondItemList.add(ItemMenuSecond("Covid"))
+        secondItemList.add(ItemMenuSecond("ТЕСТ"))
+        secondItemList.add(ItemMenuSecond("Тест"))
+        secondItemList.add(ItemMenuSecond("апвапвапвапвпа"))
     }
-
     private fun init() {
         recyclerView = binding.firstRecyclerView
         recyclerView.setHasFixedSize(true)
@@ -124,17 +111,12 @@ class MenuFragment : Fragment() {
         menuAdapter = MenuAdapter(itemlist)
         recyclerView.adapter = menuAdapter
     }
-
-
-
     private fun addDataList() {
         itemlist.add(ItemMenu("Чек-ап для\nмужчин","9 исследований","8000 ₽"))
         itemlist.add(ItemMenu("Подготовка к\nвакцинации","Комплексное обследование\nперед вакцинацией","4000 ₽"))
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

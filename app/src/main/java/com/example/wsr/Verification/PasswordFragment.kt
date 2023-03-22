@@ -1,7 +1,6 @@
 package com.example.wsr.Verification
 
-import android.graphics.Color
-import android.graphics.PorterDuff
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentPasswordBinding
@@ -73,7 +71,7 @@ class PasswordFragment : Fragment() {
             if (text.length == 1 && nextView != null) {
                 nextView.requestFocus()
             }
-            currentView.setBackgroundColor(R.drawable.password_back_ground)
+            currentView.setBackgroundResource(R.drawable.circle_blue)
             if (edit1.text.toString().isNotEmpty() &&
                 edit2.text.toString().isNotEmpty() &&
                 edit3.text.toString().isNotEmpty() &&

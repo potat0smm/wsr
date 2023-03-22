@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -29,49 +30,137 @@ import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCodeBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import org.w3c.dom.Text
 
 
 @Suppress("DEPRECATION")
 class CodeFragment : Fragment(R.layout.fragment_code) {
 
-    private lateinit var edit1:EditText
-    private lateinit var edit2:EditText
-    private lateinit var edit3:EditText
-    private lateinit var edit4:EditText
+    private lateinit var timerTextView: TextView
+    private lateinit var editTextList: List<EditText>
+    private lateinit var countDownTimer: CountDownTimer
+    private var timeLeftInMillis = 60000L
+    private val verificationCode = "1234"
 
-    private var _binding: FragmentCodeBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentCodeBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentCodeBinding.inflate(layoutInflater, container, false)
-        binding.backToEmailFragment.setOnClickListener{
+        binding = FragmentCodeBinding.inflate(inflater, container, false)
+        binding?.backToEmailFragment?.setOnClickListener {
             findNavController().navigate(R.id.action_codeFragment_to_emailFragment)
         }
+        return binding?.root
+    }
 
-        binding.goNewPassword.setOnClickListener {
-            findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        initListeners()
+        startCountDown()
+    }
+
+    private fun initViews() {
+        timerTextView = binding!!.time
+        editTextList = listOf(binding!!.OTP1, binding!!.OTP2, binding!!.OTP3, binding!!.OTP4)
+    }
+
+    private fun initListeners() {
+        editTextList.forEachIndexed { index, editText ->
+            editText.addTextChangedListener(
+                CodeTextWatcher(
+                    editTextList.getOrNull(index + 1),
+                    editTextList.getOrNull(index - 1),
+                    editText
+                )
+            )
+            editText.setOnEditorActionListener { _, _, _ ->
+                navigateToNextFragment()
+                true
+            }
         }
-
-        edit1 = binding.OTP1
-        edit2 = binding.OTP2
-        edit3 = binding.OTP4
-        edit4 = binding.OTP3
-
-        return binding.root
     }
 
-    private fun setUpEditText(){
-        edit1.addTextChangedListener(GenericTextWatcher(edit1,edit2))
-        edit1.addTextChangedListener(GenericTextWatcher(edit2,edit3))
-        edit1.addTextChangedListener(GenericTextWatcher(edit3,edit4))
-        edit1.addTextChangedListener(GenericTextWatcher(edit4,null))
+    private fun startCountDown() {
+        countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                updateCountDownText()
+            }
+
+            override fun onFinish() {
+                timeLeftInMillis = 0
+                updateCountDownText()
+            }
+        }.start()
     }
 
-    inner class GenericTextWatcher(private val currentView:View,
+    @SuppressLint("StringFormatInvalid")
+    private fun updateCountDownText() {
+        val seconds = (timeLeftInMillis / 1000).toInt()
+        val text = getString(R.string.sms_will_be_sent_in, seconds)
+        timerTextView.text = text
+        if (timeLeftInMillis == 0L) {
+            resetEditText()
+        }
+    }
+
+    private fun resetEditText() {
+        editTextList.forEach { it.setText("") }
+        countDownTimer.cancel()
+        timeLeftInMillis = 60000L
+        startCountDown()
+    }
+
+    private fun checkVerificationCode(): Boolean {
+        val code = editTextList.joinToString("") { it.text.toString() }
+        return code == verificationCode
+    }
+    private fun navigateToNextFragment() {
+        if (checkVerificationCode()) {
+            val action = CodeFragmentDirections.actionCodeFragmentToPasswordFragment()
+            findNavController().navigate(action)
+            //findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
+        } else {
+            Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+    inner class CodeTextWatcher(private val nextEditText: EditText?, private val prevEditText: EditText?, private val currentEditText: EditText) : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s?.length == 1) {
+                nextEditText?.let {
+                    it.requestFocus()
+                    it.setSelection(it.text.length)
+                } ?: run {
+                    currentEditText
+                }
+            } else if ((s?.length ?: 0) > 1) {
+                prevEditText?.let {
+                    it.requestFocus()
+                    it.setSelection(it.text.length)
+                }
+            }
+        }
+        override fun afterTextChanged(s: Editable?) {}
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+}
+
+/*  private fun setUpEditText(){
+      edit1.addTextChangedListener(GenericTextWatcher(edit1,edit2))
+      edit1.addTextChangedListener(GenericTextWatcher(edit2,edit3))
+      edit1.addTextChangedListener(GenericTextWatcher(edit3,edit4))
+      edit1.addTextChangedListener(GenericTextWatcher(edit4,null))
+  }*/
+
+   /* inner class GenericTextWatcher(private val currentView:View,
                                    private val nextView:View?) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
@@ -91,7 +180,7 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
             )
                 findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
         }
-    }
+    }*/
 
 
     /* private fun isInputValid(): Boolean{
@@ -111,7 +200,7 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
 
      }*/
 
-}
+
 /*
 class VerificationFragment : Fragment() {
 
