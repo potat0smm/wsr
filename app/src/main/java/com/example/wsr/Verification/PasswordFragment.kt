@@ -16,9 +16,8 @@ import com.example.wsr.databinding.FragmentPasswordBinding
 @Suppress("DEPRECATION")
 class PasswordFragment : Fragment() {
 
-    private lateinit var pinText: List<TextView>
     private lateinit var pinCircles: List<View>
-    private lateinit var del:ImageView
+    private lateinit var del: ImageView
     private var pinCode: String = ""
 
     private var _binding: FragmentPasswordBinding? = null
@@ -27,92 +26,80 @@ class PasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentPasswordBinding.inflate(layoutInflater, container, false)
-        // пропустить
+    ): View {
+        _binding = FragmentPasswordBinding.inflate(inflater, container, false)
+
+        //пропустить
         binding.skipped.setOnClickListener {
-            val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
-            findNavController().navigate(action)
+            navigateToCreateUserFragment()
         }
-        // кнопки
-        pinText = listOf(
-            binding.pin1,
-            binding.pin2,
-            binding.pin3,
-            binding.pin4,
-            binding.pin5,
-            binding.pin6,
-            binding.pin7,
-            binding.pin8,
-            binding.pin9,
-            binding.pin0
-        )
-        //изображения в форме кружочков
+
+        // спискок кружочков
         pinCircles = listOf(
             binding.circle1,
             binding.circle2,
             binding.circle3,
             binding.circle4
         )
-        //изображение (удаление)
+
+        //  кнопка удалить
         del = binding.pinDel
         del.setOnClickListener {
             if (pinCode.isNotEmpty()) {
                 pinCode = pinCode.dropLast(1)
-                if (pinCode.length < pinCircles.size) {
-                    pinCircles[pinCode.length].setBackgroundResource(R.drawable.circle_pass)
-                }
+                updatePinCircles()
             }
         }
+
+        // нажатие на кнопки
+        binding.pin0.setOnClickListener { onPinDigitPressed(0) }
+        binding.pin1.setOnClickListener { onPinDigitPressed(1) }
+        binding.pin2.setOnClickListener { onPinDigitPressed(2) }
+        binding.pin3.setOnClickListener { onPinDigitPressed(3) }
+        binding.pin4.setOnClickListener { onPinDigitPressed(4) }
+        binding.pin5.setOnClickListener { onPinDigitPressed(5) }
+        binding.pin6.setOnClickListener { onPinDigitPressed(6) }
+        binding.pin7.setOnClickListener { onPinDigitPressed(7) }
+        binding.pin8.setOnClickListener { onPinDigitPressed(8) }
+        binding.pin9.setOnClickListener { onPinDigitPressed(9) }
+
         return binding.root
     }
 
+    // метод для обработки нажатий на кнопки с цифрами
+    private fun onPinDigitPressed(digit: Int) {
+        if (pinCode.length < pinCircles.size) {
+            pinCode += digit.toString()
+            updatePinCircles()
+        }
+    }
+
+    // метод для обновления списка кружочков
+    private fun updatePinCircles() {
+        pinCircles.forEachIndexed { index, view ->
+            if (index < pinCode.length) {
+                view.setBackgroundResource(R.drawable.circle_blue)
+            } else {
+                view.setBackgroundResource(R.drawable.circle_circle)
+            }
+        }
+        // если пин код подходит, то переход
+        if (pinCode.length == pinCircles.size) {
+            navigateToCreateUserFragment()
+        }
+    }
+
+    // метод для перехода к следующему фрагменту
     private fun navigateToCreateUserFragment() {
         val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
         findNavController().navigate(action)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupKeyboardListeners()
-    }
-    private fun setupKeyboardListeners() {
-        pinText.forEach { textView ->
-            textView.setOnClickListener {
-                val value = textView.text.toString()
-                onPinCodeButtonClick(value)
-            }
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
-    private fun onPinCodeButtonClick(value: String) {
-        when(value){
-        "Del" ->{
-            if (pinCode.isNotEmpty()){
-                pinCode = pinCode.dropLast(1)
-                updatePinCircles()
-            }
-        }
-            "OK"->{
-                if (pinCode.isNotEmpty()){
-                    val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
-                    findNavController().navigate(action)
-                }
-            }
-            else ->{
-                if(pinCode.length < pinCircles.size){
-                    pinCode+=value
-                    updatePinCircles()
-                }
-            }
-        }
-    }
-
-    private fun updatePinCircles() {
-        pinCircles.forEachIndexed { index, view ->
-            view.setBackgroundResource(if (index < pinCode.length) R.drawable.circle_pass_two else R.drawable.circle_pass) }
-    }
 }
 
 

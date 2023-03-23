@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.SnapHelper
 import com.bumptech.glide.Glide.init
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentMenuBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 
@@ -43,6 +44,8 @@ class MenuFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
 
+
+
         init()
         initSecond()
         initThird()
@@ -51,16 +54,18 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
+        /*binding.bottomNav.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.analyzes ->{
-                   childFragmentManager.beginTransaction()
-                       .replace(R.id.fragmentContainerView,null)
-                       .commit()
-                    true
+                   val action = MenuFragmentDirections.actionMenuFragment2ToUserFragment()
+                    findNavController().navigate(action)
+                else{
+
                 }
             }
         }*/
+
+
 
 
        //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener {

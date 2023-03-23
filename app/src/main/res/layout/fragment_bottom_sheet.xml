@@ -6,6 +6,7 @@
     android:layout_height="600dp"
     android:orientation="vertical"
     android:background="@drawable/background_bottom_sheet"
+    style="@style/AppModalStyle"
     tools:context=".MainMenu.BottomSheet.BottomSheet">
 
     <androidx.constraintlayout.widget.ConstraintLayout

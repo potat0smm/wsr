@@ -22,4 +22,10 @@
     <style name="Theme.Wsr.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Wsr.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/background_bottom_sheet</item>
+    </style>
 </resources>

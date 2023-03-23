@@ -105,8 +105,7 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                 .show()
 
             // Запускаем таймер на 30 секунд
-            // Запускаем таймер на 30 секунд
-            countDownTimer = object : CountDownTimer(30000, 1000) {
+            countDownTimer = object : CountDownTimer(6000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     // Обновляем текст таймера каждую секунду
                     timerTextView.text = "Отпраивть код повторно можно\n         будет через ${millisUntilFinished / 1000} секунды"
