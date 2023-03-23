@@ -23,6 +23,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
@@ -59,7 +60,7 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initListeners()
-        startCountDown()
+        showKeyboardForFirstEditText()
     }
 
     private fun initViews() {
@@ -76,67 +77,70 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                     editText
                 )
             )
-            editText.setOnEditorActionListener { _, _, _ ->
-                navigateToNextFragment()
-                true
-            }
         }
-    }
-
-    private fun startCountDown() {
-        countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                timeLeftInMillis = millisUntilFinished
-                updateCountDownText()
-            }
-
-            override fun onFinish() {
-                timeLeftInMillis = 0
-                updateCountDownText()
-            }
-        }.start()
-    }
-
-    @SuppressLint("StringFormatInvalid")
-    private fun updateCountDownText() {
-        val seconds = (timeLeftInMillis / 1000).toInt()
-        val text = getString(R.string.sms_will_be_sent_in, seconds)
-        timerTextView.text = text
-        if (timeLeftInMillis == 0L) {
-            resetEditText()
-        }
-    }
-
-    private fun resetEditText() {
-        editTextList.forEach { it.setText("") }
-        countDownTimer.cancel()
-        timeLeftInMillis = 60000L
-        startCountDown()
     }
 
     private fun checkVerificationCode(): Boolean {
         val code = editTextList.joinToString("") { it.text.toString() }
         return code == verificationCode
     }
+
+    private fun showKeyboardForFirstEditText() {
+        val firstEditText = editTextList.firstOrNull()
+        firstEditText?.requestFocus()
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(firstEditText, InputMethodManager.SHOW_IMPLICIT)
+    }
+
     private fun navigateToNextFragment() {
         if (checkVerificationCode()) {
+            // Переход на следующий фрагмент
             val action = CodeFragmentDirections.actionCodeFragmentToPasswordFragment()
             findNavController().navigate(action)
-            //findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
+          //  findNavController().popBackStack(R.id.passwordFragment, true)
         } else {
+            // Если пароль неверный, показываем Toast с ошибкой
             Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT)
                 .show()
+
+            // Запускаем таймер на 30 секунд
+            // Запускаем таймер на 30 секунд
+            countDownTimer = object : CountDownTimer(30000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    // Обновляем текст таймера каждую секунду
+                    timerTextView.text = "Отпраивть код повторно можно\n         будет через ${millisUntilFinished / 1000} секунды"
+                }
+
+                override fun onFinish() {
+                    // Сбрасываем текст таймера и разблокируем все EditText
+                    timerTextView.text = ""
+                    editTextList.forEach { it.isEnabled = true }
+                }
+            }.start()
+
+            // Блокируем все EditText на время таймера
+            editTextList.forEach { it.isEnabled = false }
         }
     }
-    inner class CodeTextWatcher(private val nextEditText: EditText?, private val prevEditText: EditText?, private val currentEditText: EditText) : TextWatcher {
+
+    inner class CodeTextWatcher(
+        private val nextEditText: EditText?,
+        private val prevEditText: EditText?,
+        private val currentEditText: EditText
+    ) : TextWatcher {
+
+        private var timerStarted = false
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (s?.length == 1) {
                 nextEditText?.let {
                     it.requestFocus()
                     it.setSelection(it.text.length)
                 } ?: run {
-                    currentEditText
+                    navigateToNextFragment()
                 }
             } else if ((s?.length ?: 0) > 1) {
                 prevEditText?.let {
@@ -145,7 +149,33 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                 }
             }
         }
-        override fun afterTextChanged(s: Editable?) {}
+
+        override fun afterTextChanged(s: Editable?) {
+            if (s?.length == 4 && !timerStarted) {
+                if (checkVerificationCode()) {
+                    navigateToNextFragment()
+                } else {
+                    Toast.makeText( requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
+
+                    // Запускаем таймер на 60 секунд
+                    countDownTimer = object : CountDownTimer(60000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            timerStarted = true
+                            timerTextView.text =
+                                "Try again in ${millisUntilFinished / 1000} seconds"
+                        }
+
+                        override fun onFinish() {
+                            timerStarted = false
+                            timerTextView.text = ""
+                            editTextList.forEach { it.isEnabled = true }
+                        }
+                    }.start()
+
+                    editTextList.forEach { it.isEnabled = false }
+                }
+            }
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

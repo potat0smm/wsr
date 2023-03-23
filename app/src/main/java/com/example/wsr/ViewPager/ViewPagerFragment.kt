@@ -62,7 +62,6 @@ class ViewPagerFragment : Fragment() {
                 setCurrentDot(position)
             }
         })
-
         return binding.root
     }
 

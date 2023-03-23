@@ -2,13 +2,12 @@ package com.example.wsr.Verification
 
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentPasswordBinding
@@ -17,11 +16,10 @@ import com.example.wsr.databinding.FragmentPasswordBinding
 @Suppress("DEPRECATION")
 class PasswordFragment : Fragment() {
 
-
-    private lateinit var edit1: EditText
-    private lateinit var edit2: EditText
-    private lateinit var edit3: EditText
-    private lateinit var edit4: EditText
+    private lateinit var pinText: List<TextView>
+    private lateinit var pinCircles: List<View>
+    private lateinit var del:ImageView
+    private var pinCode: String = ""
 
     private var _binding: FragmentPasswordBinding? = null
     private val binding get() = _binding!!
@@ -32,52 +30,89 @@ class PasswordFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPasswordBinding.inflate(layoutInflater, container, false)
-
-        binding.goMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_passwordFragment_to_createUser)
+        // пропустить
+        binding.skipped.setOnClickListener {
+            val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
+            findNavController().navigate(action)
         }
-
-        edit1 = binding.etPassword1
-        edit2 = binding.etPassword2
-        edit3 = binding.etPassword3
-        edit4 = binding.etPassword4
-
-        setUpEditTexts()
-
+        // кнопки
+        pinText = listOf(
+            binding.pin1,
+            binding.pin2,
+            binding.pin3,
+            binding.pin4,
+            binding.pin5,
+            binding.pin6,
+            binding.pin7,
+            binding.pin8,
+            binding.pin9,
+            binding.pin0
+        )
+        //изображения в форме кружочков
+        pinCircles = listOf(
+            binding.circle1,
+            binding.circle2,
+            binding.circle3,
+            binding.circle4
+        )
+        //изображение (удаление)
+        del = binding.pinDel
+        del.setOnClickListener {
+            if (pinCode.isNotEmpty()) {
+                pinCode = pinCode.dropLast(1)
+                if (pinCode.length < pinCircles.size) {
+                    pinCircles[pinCode.length].setBackgroundResource(R.drawable.circle_pass)
+                }
+            }
+        }
         return binding.root
     }
 
-    private fun setUpEditTexts() {
-        edit1.addTextChangedListener(GenericTextWatcher(edit1,edit2))
-        edit2.addTextChangedListener(GenericTextWatcher(edit2,edit3))
-        edit3.addTextChangedListener(GenericTextWatcher(edit3,edit4))
-        edit4.addTextChangedListener(GenericTextWatcher(edit4,null))
+    private fun navigateToCreateUserFragment() {
+        val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
+        findNavController().navigate(action)
     }
 
-    private inner class GenericTextWatcher(
-        private val currentView:View,
-        private val nextView:View?
-    ):TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-        }
-
-        override fun afterTextChanged(editable: Editable) {
-            val text = editable.toString()
-            if (text.length == 1 && nextView != null) {
-                nextView.requestFocus()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupKeyboardListeners()
+    }
+    private fun setupKeyboardListeners() {
+        pinText.forEach { textView ->
+            textView.setOnClickListener {
+                val value = textView.text.toString()
+                onPinCodeButtonClick(value)
             }
-            currentView.setBackgroundResource(R.drawable.circle_blue)
-            if (edit1.text.toString().isNotEmpty() &&
-                edit2.text.toString().isNotEmpty() &&
-                edit3.text.toString().isNotEmpty() &&
-                edit4.text.toString().isNotEmpty()
-            )
-                findNavController().navigate(R.id.action_passwordFragment_to_createUser)
         }
+    }
+
+    private fun onPinCodeButtonClick(value: String) {
+        when(value){
+        "Del" ->{
+            if (pinCode.isNotEmpty()){
+                pinCode = pinCode.dropLast(1)
+                updatePinCircles()
+            }
+        }
+            "OK"->{
+                if (pinCode.isNotEmpty()){
+                    val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
+                    findNavController().navigate(action)
+                }
+            }
+            else ->{
+                if(pinCode.length < pinCircles.size){
+                    pinCode+=value
+                    updatePinCircles()
+                }
+            }
+        }
+    }
+
+    private fun updatePinCircles() {
+        pinCircles.forEachIndexed { index, view ->
+            view.setBackgroundResource(if (index < pinCode.length) R.drawable.circle_pass_two else R.drawable.circle_pass) }
     }
 }
+
+
