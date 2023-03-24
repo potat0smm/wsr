@@ -42,7 +42,6 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
     private lateinit var countDownTimer: CountDownTimer
     private var timeLeftInMillis = 60000L
     private val verificationCode = "1234"
-
     private var binding: FragmentCodeBinding? = null
 
     override fun onCreateView(
@@ -55,19 +54,16 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         }
         return binding?.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initListeners()
         showKeyboardForFirstEditText()
     }
-
     private fun initViews() {
         timerTextView = binding!!.time
         editTextList = listOf(binding!!.OTP1, binding!!.OTP2, binding!!.OTP3, binding!!.OTP4)
     }
-
     private fun initListeners() {
         editTextList.forEachIndexed { index, editText ->
             editText.addTextChangedListener(
@@ -79,12 +75,10 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
             )
         }
     }
-
     private fun checkVerificationCode(): Boolean {
         val code = editTextList.joinToString("") { it.text.toString() }
         return code == verificationCode
     }
-
     private fun showKeyboardForFirstEditText() {
         val firstEditText = editTextList.firstOrNull()
         firstEditText?.requestFocus()
@@ -92,7 +86,6 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(firstEditText, InputMethodManager.SHOW_IMPLICIT)
     }
-
     private fun navigateToNextFragment() {
         if (checkVerificationCode()) {
             // Переход на следующий фрагмент
@@ -101,38 +94,30 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
           //  findNavController().popBackStack(R.id.passwordFragment, true)
         } else {
             // Если пароль неверный, показываем Toast с ошибкой
-            Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT)
-                .show()
-
+            Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
             // Запускаем таймер на 30 секунд
-            countDownTimer = object : CountDownTimer(6000, 1000) {
+            countDownTimer = object : CountDownTimer(60000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     // Обновляем текст таймера каждую секунду
                     timerTextView.text = "Отпраивть код повторно можно\n         будет через ${millisUntilFinished / 1000} секунды"
                 }
-
                 override fun onFinish() {
                     // Сбрасываем текст таймера и разблокируем все EditText
                     timerTextView.text = ""
                     editTextList.forEach { it.isEnabled = true }
                 }
             }.start()
-
             // Блокируем все EditText на время таймера
             editTextList.forEach { it.isEnabled = false }
         }
     }
-
     inner class CodeTextWatcher(
         private val nextEditText: EditText?,
         private val prevEditText: EditText?,
         private val currentEditText: EditText
     ) : TextWatcher {
-
         private var timerStarted = false
-
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (s?.length == 1) {
                 nextEditText?.let {
@@ -148,14 +133,12 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                 }
             }
         }
-
         override fun afterTextChanged(s: Editable?) {
             if (s?.length == 4 && !timerStarted) {
                 if (checkVerificationCode()) {
                     navigateToNextFragment()
                 } else {
                     Toast.makeText( requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
-
                     // Запускаем таймер на 60 секунд
                     countDownTimer = object : CountDownTimer(60000, 1000) {
                         override fun onTick(millisUntilFinished: Long) {
@@ -163,14 +146,12 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                             timerTextView.text =
                                 "Try again in ${millisUntilFinished / 1000} seconds"
                         }
-
                         override fun onFinish() {
                             timerStarted = false
                             timerTextView.text = ""
                             editTextList.forEach { it.isEnabled = true }
                         }
                     }.start()
-
                     editTextList.forEach { it.isEnabled = false }
                 }
             }
@@ -181,7 +162,6 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         binding = null
     }
 }
-
 /*  private fun setUpEditText(){
       edit1.addTextChangedListener(GenericTextWatcher(edit1,edit2))
       edit1.addTextChangedListener(GenericTextWatcher(edit2,edit3))

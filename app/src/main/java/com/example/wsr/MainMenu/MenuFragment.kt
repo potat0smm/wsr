@@ -1,5 +1,6 @@
 package com.example.wsr.MainMenu
 
+import android.annotation.SuppressLint
 import android.content.ClipData.Item
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,7 +19,11 @@ import com.bumptech.glide.Glide.init
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentMenuBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.tabs.TabLayout.LabelVisibility
+import com.example.wsr.R.id.menuFragment2 as menuFragment2
 
 
 @Suppress("DEPRECATION")
@@ -41,71 +46,34 @@ class MenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
-
-
 
         init()
         initSecond()
         initThird()
         return binding.root
     }
+    @SuppressLint("CommitTransaction")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*binding.bottomNav.setOnItemSelectedListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.analyzes ->{
-                   val action = MenuFragmentDirections.actionMenuFragment2ToUserFragment()
-                    findNavController().navigate(action)
-                else{
+        val bottomNavigationView = binding.bottomNav
 
+
+        bottomNavigationView.setOnItemSelectedListener { item->
+            when(item.itemId){
+                R.id.profil -> {
+                    findNavController().navigate(R.id.userFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.analyzes ->{
+                    findNavController().navigate(R.id.createUser)
+                    return@setOnItemSelectedListener true
                 }
             }
-        }*/
-
-
-        /*ЗАВТРА СДЕЛАТЬ
-        class MainFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
-        val navView: BottomNavigationView = view.findViewById(R.id.bottom_navigation)
-        navView.setOnNavigationItemSelectedListener(this)
-
-        // Отобразить начальный фрагмент
-        val fragment = HomeFragment()
-        childFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-
-        return view
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                val fragment = HomeFragment()
-                childFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-                return true
-            }
-            R.id.navigation_profile -> {
-                val fragment = ProfileFragment()
-                childFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-                return true
-            }
-            // добавьте обработку для других элементов при необходимости
-            else -> return false
+            true
         }
     }
-}
-        */
-
-
-       //binding.thirdRecyclerView.findViewById<MaterialButton>(R.id.add_menu).setOnClickListener {
-         // findNavController().navigate(R.id.action_menuFragment2_to_bottomSheet)
-       //}
-    }
-
     private fun initThird() {
         recyclerView = binding.thirdRecyclerView
         recyclerView.setHasFixedSize(true)

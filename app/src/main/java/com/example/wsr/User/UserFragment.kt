@@ -1,5 +1,6 @@
 package com.example.wsr.User
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ class UserFragment : Fragment() {
 
     }
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +35,13 @@ class UserFragment : Fragment() {
         binding.addUser.setOnClickListener {
             findNavController().popBackStack(R.id.menuFragment2,false)
         }
+
+
+
+        val male = resources.getStringArray(R.array.MaleFemale)
+        val arrayAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu,male)
+        binding.autoCompleteUser.setAdapter(arrayAdapter)
+
 
         val items = listOf("Мужчина", "Девушка")
         val autoCompleteUser: AutoCompleteTextView = binding.autoCompleteUser
@@ -45,6 +54,4 @@ class UserFragment : Fragment() {
 
         return binding.root
     }
-
-
 }

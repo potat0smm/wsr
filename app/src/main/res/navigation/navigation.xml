@@ -70,9 +70,7 @@
         <action
             android:id="@+id/action_menuFragment2_to_bottomSheet"
             app:destination="@id/bottomSheet" />
-        <action
-            android:id="@+id/action_menuFragment2_to_userFragment"
-            app:destination="@id/userFragment" />
+
         <action
             android:id="@+id/action_menuFragment2_to_itemBasket"
             app:destination="@id/itemBasket" />
@@ -93,7 +91,11 @@
         android:id="@+id/userFragment"
         android:name="com.example.wsr.User.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_menuFragment2"
+            app:destination="@id/menuFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/itemBasket"
         android:name="com.example.wsr.basket.ItemBasket"
