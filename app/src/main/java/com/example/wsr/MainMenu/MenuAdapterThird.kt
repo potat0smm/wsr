@@ -1,11 +1,14 @@
 package com.example.wsr.MainMenu
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wsr.ManyFragment.MainFragment
+import com.example.wsr.ManyFragment.MainFragmentDirections
 import com.example.wsr.R
 import com.google.android.material.button.MaterialButton
 
@@ -39,13 +42,13 @@ class MenuAdapterThird(private val menuThirdList: List<ItemMenuThird>):RecyclerV
         holder.day.text = item.day
         holder.price.text = item.price
         holder.itemView.setOnClickListener{view->
-            val ai = MenuFragmentDirections.actionMenuFragment2ToBottomSheet()
-            view.findNavController().navigate(ai) 
+            val ai = MainFragmentDirections.actionMainFragmentToBottomSheet()
+            view.findNavController().navigate(ai)
         }
         holder.add.setOnClickListener {view->
-            val ik = MenuFragmentDirections.actionMenuFragment2ToBottomSheetGoBasket()
-            view.findNavController().navigate(ik)
-        }
+            val ik = MainFragmentDirections.actionMainFragmentToBottomSheet()
+             view.findNavController().navigate(ik)
+       }
 
     }
 

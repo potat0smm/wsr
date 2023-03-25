@@ -1,5 +1,6 @@
 package com.example.wsr.MainMenu
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
@@ -49,7 +49,7 @@
         android:name="com.example.wsr.Verification.PasswordFragment"
         android:label="fragment_password"
         tools:layout="@layout/fragment_password" >
-        <action
+         <action
             android:id="@+id/action_passwordFragment_to_createUser"
             app:destination="@id/createUser" />
     </fragment>
@@ -59,51 +59,21 @@
         android:label="fragment_create_user"
         tools:layout="@layout/fragment_create_user" >
         <action
-            android:id="@+id/action_createUser_to_menuFragment2"
-            app:destination="@id/menuFragment2" />
+            android:id="@+id/action_createUser_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/menuFragment2"
-        android:name="com.example.wsr.MainMenu.MenuFragment"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        android:id="@+id/mainFragment"
+        android:name="com.example.wsr.ManyFragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_menuFragment2_to_bottomSheet"
+            android:id="@+id/action_mainFragment_to_bottomSheet"
             app:destination="@id/bottomSheet" />
-
-        <action
-            android:id="@+id/action_menuFragment2_to_itemBasket"
-            app:destination="@id/itemBasket" />
-        <action
-            android:id="@+id/action_menuFragment2_to_bottomSheetGoBasket"
-            app:destination="@id/bottomSheetGoBasket" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheet"
         android:name="com.example.wsr.MainMenu.BottomSheet.BottomSheet"
-        android:label=""
-        tools:layout="@layout/fragment_bottom_sheet">
-        <action
-            android:id="@+id/action_bottomSheet_to_bottomSheetGoBasket"
-            app:destination="@id/bottomSheetGoBasket" />
-    </dialog>
-    <fragment
-        android:id="@+id/userFragment"
-        android:name="com.example.wsr.User.UserFragment"
-        android:label="fragment_user"
-        tools:layout="@layout/fragment_user" >
-        <action
-            android:id="@+id/action_userFragment_to_menuFragment2"
-            app:destination="@id/menuFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/itemBasket"
-        android:name="com.example.wsr.basket.ItemBasket"
-        android:label="fragment_item_basket"
-        tools:layout="@layout/fragment_item_basket" />
-    <dialog
-        android:id="@+id/bottomSheetGoBasket"
-        android:name="com.example.wsr.MainMenu.BottomSheet.BottomSheetGoBasket"
-        android:label="fragment_bottom_sheet_go_basket"
-        tools:layout="@layout/fragment_bottom_sheet_go_basket" />
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" />
 </navigation>

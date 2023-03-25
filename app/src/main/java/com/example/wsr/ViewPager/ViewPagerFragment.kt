@@ -20,7 +20,6 @@ class ViewPagerFragment : Fragment() {
 
     private var _binding:FragmentViewPagerBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var viewPager2: ViewPager2
     private lateinit var dotsLayout: LinearLayout
     private lateinit var dots: Array<ImageView>
@@ -29,27 +28,12 @@ class ViewPagerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentViewPagerBinding.inflate(layoutInflater,container,false)
-
-        /* val fragmentList = arrayListOf<Fragment>(
-             FirstScreen(),
-             SecondScreen(),
-             ThirdScreen()
-         )*/
-
-        // val adapter = ViewPagerAdapter(fragmentList,requireActivity().supportFragmentManager,
-        //lifecycle)
-
-        //val viewPager = view.findViewById<ViewPager2>(R.id.viewPager)
-        //viewPager.adapter = adapter
 
         viewPager2 = binding.viewPager
         dotsLayout = binding.layoutDots

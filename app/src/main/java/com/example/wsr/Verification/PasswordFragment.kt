@@ -91,8 +91,7 @@ class PasswordFragment : Fragment() {
 
     // метод для перехода к следующему фрагменту
     private fun navigateToCreateUserFragment() {
-        val action = PasswordFragmentDirections.actionPasswordFragmentToCreateUser()
-        findNavController().navigate(action)
+        findNavController().navigate(R.id.action_passwordFragment_to_createUser)
     }
 
     override fun onDestroyView() {

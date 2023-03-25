@@ -1,29 +1,17 @@
 package com.example.wsr.MainMenu
 
 import android.annotation.SuppressLint
-import android.content.ClipData.Item
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import androidx.core.view.get
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.bumptech.glide.Glide.init
-import com.example.wsr.R
 import com.example.wsr.databinding.FragmentMenuBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.tabs.TabLayout.LabelVisibility
-import com.example.wsr.R.id.menuFragment2 as menuFragment2
+
 
 
 @Suppress("DEPRECATION")
@@ -57,22 +45,6 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNavigationView = binding.bottomNav
-
-
-        bottomNavigationView.setOnItemSelectedListener { item->
-            when(item.itemId){
-                R.id.profil -> {
-                    findNavController().navigate(R.id.userFragment)
-                    return@setOnItemSelectedListener true
-                }
-                R.id.analyzes ->{
-                    findNavController().navigate(R.id.createUser)
-                    return@setOnItemSelectedListener true
-                }
-            }
-            true
-        }
     }
     private fun initThird() {
         recyclerView = binding.thirdRecyclerView
@@ -110,7 +82,7 @@ class MenuFragment : Fragment() {
     private fun addDataListSecond() {
         secondItemList.add(ItemMenuSecond("Популярный"))
         secondItemList.add(ItemMenuSecond("Covid"))
-        secondItemList.add(ItemMenuSecond("ТЕСТ"))
+        secondItemList.add(ItemMenuSecond("Комплексные"))
         secondItemList.add(ItemMenuSecond("Тест"))
         secondItemList.add(ItemMenuSecond("апвапвапвапвпа"))
     }

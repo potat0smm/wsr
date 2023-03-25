@@ -1,38 +1,21 @@
 package com.example.wsr.Verification
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCodeBinding
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import org.w3c.dom.Text
-
 
 @Suppress("DEPRECATION")
 class CodeFragment : Fragment(R.layout.fragment_code) {

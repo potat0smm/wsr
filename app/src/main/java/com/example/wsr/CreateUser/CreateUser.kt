@@ -30,7 +30,7 @@ class CreateUser : Fragment() {
         _binding = FragmentCreateUserBinding.inflate(inflater, container, false)
 
         binding.goInMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_createUser_to_menuFragment2)
+            findNavController().navigate(R.id.action_createUser_to_mainFragment)
         }
 
         val maleFemale = resources.getStringArray(R.array.MaleFemale)
@@ -38,7 +38,7 @@ class CreateUser : Fragment() {
         binding.autoComplete.setAdapter(arrayAdapter)
 
         binding.add.setOnClickListener {
-            findNavController().navigate(R.id.action_createUser_to_menuFragment2)
+            findNavController().navigate(R.id.action_createUser_to_mainFragment)
         }
 
         val items = listOf("Мужчина", "Девушка")

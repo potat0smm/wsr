@@ -30,7 +30,7 @@ open class BottomSheet : BottomSheetDialogFragment() {
 
 
         binding.save.setOnClickListener {
-            findNavController().popBackStack(R.id.menuFragment2,false)
+           // findNavController().popBackStack(R.id.menuFragment2,false)
             //findNavController().navigate(R.id.action_bottomSheet_to_bottomSheetGoBasket)
 
         }
@@ -38,7 +38,7 @@ open class BottomSheet : BottomSheetDialogFragment() {
 
 
         binding.close.setOnClickListener{
-            findNavController().popBackStack(R.id.menuFragment2,false)
+      //      findNavController().popBackStack(R.id.menuFragment2,false)
         }
 
         return binding.root
