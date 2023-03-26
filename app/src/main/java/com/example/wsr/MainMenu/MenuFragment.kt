@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.wsr.databinding.FragmentMenuBinding
 
-
-
 @Suppress("DEPRECATION")
 class MenuFragment : Fragment() {
 
