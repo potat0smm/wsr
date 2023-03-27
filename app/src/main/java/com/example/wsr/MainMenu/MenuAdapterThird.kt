@@ -57,7 +57,7 @@ class MenuAdapterThird(private val menuThirdList: List<ItemMenuThird>): Recycler
         }
 
         holder.add.setOnClickListener { view ->
-            item.isButtonClicked = !item.isButtonClicked // инвертируем состояние кнопки
+            item.isButtonClicked = !item.isButtonClicked //инвертируем состояние кнопки
             if (item.isButtonClicked) { // если кнопка была нажата
                 holder.add.text = "Убрать"
                 holder.add.setBackgroundResource(R.drawable.bottom_less_menu)
