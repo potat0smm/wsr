@@ -23,9 +23,13 @@
 
     <style name="Theme.Wsr.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/background_bottom_sheet</item>
+    <style name="MyDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="MyBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
 </resources>

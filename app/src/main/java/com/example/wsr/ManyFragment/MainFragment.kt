@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.wsr.MainMenu.MenuAdapterThird
 import com.example.wsr.MainMenu.MenuFragment
 import com.example.wsr.R
 import com.example.wsr.User.UserFragment
 import com.example.wsr.databinding.FragmentMainBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.navigation.NavigationView
 
 
 @Suppress("UNUSED_EXPRESSION")
@@ -27,6 +31,8 @@ class MainFragment : Fragment() {
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         replaceFragment(MenuFragment())
+
+
 
         binding?.bottomNavigationView?.setOnItemSelectedListener { item ->
             when (item.itemId) {

@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wsr.R
+import com.google.android.material.button.MaterialButton
 
 class MenuAdapterSecond(private val menuSecondList: List<ItemMenuSecond>):RecyclerView.Adapter<MenuAdapterSecond.SecondMenuViewHolder>(){
 
     class SecondMenuViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         val nameSecond: TextView = itemView.findViewById(R.id.name_second)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SecondMenuViewHolder {
