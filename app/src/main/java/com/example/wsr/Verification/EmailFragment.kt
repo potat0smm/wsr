@@ -69,7 +69,6 @@ class EmailFragment : Fragment() {
             binding.materialButton.isEnabled = status
             binding.materialButton.setOnClickListener{
                 findNavController().navigate(R.id.action_emailFragment_to_codeFragment)
-                //Toast.makeText(context,"Register successful",Toast.LENGTH_SHORT).show()
             }
         }
 
