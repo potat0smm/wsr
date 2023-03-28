@@ -6,49 +6,63 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import com.example.wsr.Api.model.MainViewModel
 import com.example.wsr.databinding.FragmentMenuBinding
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.dsl.module
 
-@Suppress("DEPRECATION")
+
 class MenuFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var itemlist: ArrayList<ItemMenu>
     private lateinit var menuAdapter: MenuAdapter
+    private lateinit var itemlist: ArrayList<ItemMenu>
+
 
     private lateinit var secondItemList: ArrayList<ItemMenuSecond>
     private lateinit var secondMenuAdapter: MenuAdapterSecond
 
-    private lateinit var thirdItemList: ArrayList<ItemMenuThird>
+    private lateinit var recyclerView: RecyclerView
     private lateinit var thirdMenuAdapter: MenuAdapterThird
+    private val viewModel: MainViewModel by viewModel()
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
 
-        val hiddenButton = binding.buttonGoBasketBasket
-        hiddenButton.visibility = View.GONE
 
+            recyclerView = binding.thirdRecyclerView
+            thirdMenuAdapter = MenuAdapterThird(emptyList(),{item -> viewModel.addItemToCart(item)})
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = thirdMenuAdapter
+
+            viewModel.catalogList.observe(viewLifecycleOwner, Observer { catalogList ->
+                val catalogItemList = catalogList.flatMap { it.items }
+                thirdMenuAdapter = MenuAdapterThird(catalogItemList) { item -> viewModel.addItemToCart(item) }
+                recyclerView.adapter = thirdMenuAdapter
+            })
 
         init()
         initSecond()
-        initThird()
         return binding.root
     }
-    @SuppressLint("CommitTransaction")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
     }
-    private fun initThird() {
+    /*private fun initThird() {
         recyclerView = binding.thirdRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
@@ -56,7 +70,7 @@ class MenuFragment : Fragment() {
 
         addDataListThird()
 
-        thirdMenuAdapter = MenuAdapterThird(thirdItemList)
+        thirdMenuAdapter = MenuAdapterThird(menuThirdList)
         recyclerView.adapter = thirdMenuAdapter
     }
     private fun addDataListThird() {
@@ -70,7 +84,7 @@ class MenuFragment : Fragment() {
         thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽",false))
         thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽",false))
         thirdItemList.add(ItemMenuThird("ПЦР-тест на определение РНК\nкоронавируса стандартный","2 дня","1800 ₽",false))
-    }
+    }*/
     private fun initSecond() {
         recyclerView = binding.secondRecyclerView
         recyclerView.setHasFixedSize(true)
@@ -96,7 +110,6 @@ class MenuFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
         val snapHelper : SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
-        itemlist = ArrayList()
 
         addDataList()
 
@@ -111,4 +124,5 @@ class MenuFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

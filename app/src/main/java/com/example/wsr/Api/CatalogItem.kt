@@ -1,12 +1,18 @@
 package com.example.wsr.Api
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
 data class CatalogItem(
-    val bio: String,
-    val category: String,
-    val description: String,
     val id: Int,
     val name: String,
+    val description: String,
     val preparation: String,
     val price: String,
-    val time_result: String
+    val category: String,
+    val timeResult: String,
+    val bio: String,
+    var isAddedToCart: Boolean = false
+
 )

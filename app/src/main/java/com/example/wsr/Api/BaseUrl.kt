@@ -14,6 +14,4 @@ object BaseUrl {
     val api: SimpleApi by lazy{
         retrofit.create(SimpleApi::class.java)
     }
-
-
 }
