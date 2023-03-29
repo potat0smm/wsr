@@ -11,8 +11,8 @@ data class CatalogItem(
     val preparation: String,
     val price: String,
     val category: String,
-    val timeResult: String,
+    val time_result: String,
     val bio: String,
-    var isAddedToCart: Boolean = false
-
+    var isAddedToCart: Boolean,
+    var button: Boolean
 )

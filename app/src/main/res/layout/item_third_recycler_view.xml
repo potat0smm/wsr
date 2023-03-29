@@ -8,8 +8,7 @@
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainMenu.MenuFragment"
-    app:cardElevation="8dp">
+    tools:context=".MainMenu.MenuFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,7 +24,8 @@
             android:background="@drawable/background_button_one"
             android:hint="Добавить"
             android:textColorHint="@color/white"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textAllCaps="false"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,24 +33,26 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="150dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="70dp"
             android:text="ПЦР-тест на оперделение РНК\nкоронавируса стандартный"
-            android:textStyle="bold"
             android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/day"
+            android:id="@+id/timeResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="317dp"
+            android:layout_marginEnd="200dp"
             android:text="2 дня"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -61,13 +63,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="307dp"
-            android:textStyle="bold"
             android:text="1800 ₽"
             android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/day" />
-
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

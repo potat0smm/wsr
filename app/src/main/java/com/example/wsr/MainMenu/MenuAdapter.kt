@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wsr.Api.NewsItem
 import com.example.wsr.R
+import com.squareup.picasso.Picasso
 
-class MenuAdapter(private val menuList: List<ItemMenu>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>(){
+class MenuAdapter(var menuList: List<NewsItem>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>(){
 
     class MenuViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         val firstName: TextView = itemView.findViewById(R.id.first_name)
         val firstTitle: TextView = itemView.findViewById(R.id.title_first)
         val firstPrice: TextView = itemView.findViewById(R.id.price_first)
-       // val firstImg: ImageView = itemView.findViewById<ImageView>(R.id.img_first)
-
+        val firstImg: ImageView = itemView.findViewById(R.id.img_first)
 
     }
 
@@ -30,9 +31,10 @@ class MenuAdapter(private val menuList: List<ItemMenu>):RecyclerView.Adapter<Men
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         val item = menuList[position]
-        holder.firstName.text = item.first_name
-        holder.firstTitle.text = item.title_first
-        holder.firstPrice.text = item.price_first
+        holder.firstName.text = item.name
+        holder.firstTitle.text = item.description
+        holder.firstPrice.text = item.price
+        Picasso.get().load(item.image).into(holder.firstImg)
     }
 
 }
