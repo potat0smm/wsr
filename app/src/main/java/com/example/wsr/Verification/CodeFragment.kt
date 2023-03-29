@@ -14,8 +14,18 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.wsr.Api.BaseUrl
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCodeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.io.BufferedWriter
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 
 @Suppress("DEPRECATION")
 class CodeFragment : Fragment(R.layout.fragment_code) {
@@ -74,7 +84,7 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
             // Переход на следующий фрагмент
             val action = CodeFragmentDirections.actionCodeFragmentToPasswordFragment()
             findNavController().navigate(action)
-          //  findNavController().popBackStack(R.id.passwordFragment, true)
+            //  findNavController().popBackStack(R.id.passwordFragment, true)
         } else {
             // Если пароль неверный, показываем Toast с ошибкой
             Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
@@ -247,5 +257,154 @@ class VerificationFragment : Fragment() {
         return view
     }
 
+}
+ */
+
+
+/*
+@Suppress("DEPRECATION")
+class CodeFragment : Fragment(R.layout.fragment_code) {
+
+    private lateinit var timerTextView: TextView
+    private lateinit var editTextList: List<EditText>
+    private lateinit var countDownTimer: CountDownTimer
+    private var timeLeftInMillis = 60000L
+    //private val verificationCode = "1234"
+    private var binding: FragmentCodeBinding? = null
+    private var email: String = ""
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCodeBinding.inflate(inflater, container, false)
+        binding?.backToEmailFragment?.setOnClickListener {
+            findNavController().navigate(R.id.action_codeFragment_to_emailFragment)
+        }
+        email = arguments?.getString("email") ?: ""
+        return binding?.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        initListeners()
+        showKeyboardForFirstEditText()
+    }
+    private fun initViews() {
+        timerTextView = binding!!.time
+        editTextList = listOf(binding!!.OTP1, binding!!.OTP2, binding!!.OTP3, binding!!.OTP4)
+    }
+    private fun initListeners() {
+        editTextList.forEachIndexed { index, editText ->
+            editText.addTextChangedListener(
+                CodeTextWatcher(
+                    editTextList.getOrNull(index + 1),
+                    editTextList.getOrNull(index - 1),
+                    editText
+                )
+            )
+        }
+    }
+    private fun checkVerificationCode(): Boolean {
+        val code = editTextList.joinToString("") { it.text.toString() }
+        return code == email
+    }
+    private fun showKeyboardForFirstEditText() {
+        val firstEditText = editTextList.firstOrNull()
+        firstEditText?.requestFocus()
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(firstEditText, InputMethodManager.SHOW_IMPLICIT)
+    }
+    private fun navigateToNextFragment() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val api= BaseUrl()
+                val apiService = api.apiService
+                val requestBody = JSONObject()
+                requestBody.put("code", editTextList.joinToString("") { it.text.toString() })
+
+                val response = apiService.signIn(email, requestBody.toString())
+                if (response.isSuccessful) {
+                    // Переход на следующий фрагмент
+                    withContext(Dispatchers.Main) {
+                        val action = CodeFragmentDirections.actionCodeFragmentToPasswordFragment()
+                        findNavController().navigate(action)
+                    }
+                } else {
+                    // Если пароль неверный, показываем Toast с ошибкой
+                    Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
+                    // Запускаем таймер на 30 секунд
+                    countDownTimer = object : CountDownTimer(60000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            // Обновляем текст таймера каждую секунду
+                            timerTextView.text = "Отпраивть код повторно можно\n         будет через ${millisUntilFinished / 1000} секунды"
+                        }
+                        override fun onFinish() {
+                            // Сбрасываем текст таймера и разблокируем все EditText
+                            timerTextView.text = ""
+                            editTextList.forEach { it.isEnabled = true }
+                        }
+                    }.start()
+                    // Блокируем все EditText на время таймера
+                    editTextList.forEach { it.isEnabled = false }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    inner class CodeTextWatcher(
+        private val nextEditText: EditText?,
+        private val prevEditText: EditText?,
+        private val currentEditText: EditText
+    ) : TextWatcher {
+        private var timerStarted = false
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s?.length == 1) {
+                nextEditText?.let {
+                    it.requestFocus()
+                    it.setSelection(it.text.length)
+                } ?: run {
+                    navigateToNextFragment()
+                }
+            } else if ((s?.length ?: 0) > 1) {
+                prevEditText?.let {
+                    it.requestFocus()
+                    it.setSelection(it.text.length)
+                }
+            }
+        }
+        override fun afterTextChanged(s: Editable?) {
+            if (s?.length == 4 && !timerStarted) {
+                if (checkVerificationCode()) {
+                    navigateToNextFragment()
+                } else {
+                    Toast.makeText( requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
+                    // Запускаем таймер на 60 секунд
+                    countDownTimer = object : CountDownTimer(60000, 1000) {
+                        override fun onTick(millisUntilFinished: Long) {
+                            timerStarted = true
+                            timerTextView.text =
+                                "Try again in ${millisUntilFinished / 1000} seconds"
+                        }
+                        override fun onFinish() {
+                            timerStarted = false
+                            timerTextView.text = ""
+                            editTextList.forEach { it.isEnabled = true }
+                        }
+                    }.start()
+                    editTextList.forEach { it.isEnabled = false }
+                }
+            }
+        }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
  */
