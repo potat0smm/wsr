@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wsr.MainMenu.MenuAdapterThird
-import com.example.wsr.MainMenu.MenuFragment
+//import com.example.wsr.MainMenu.MenuFragment
 import com.example.wsr.R
 import com.example.wsr.User.UserFragment
 import com.example.wsr.databinding.FragmentMainBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 
-
+/*
 @Suppress("UNUSED_EXPRESSION")
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -60,3 +60,5 @@ class MainFragment : Fragment() {
         _binding = null
     }
 }
+
+ */

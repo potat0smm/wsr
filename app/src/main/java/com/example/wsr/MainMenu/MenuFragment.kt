@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.example.wsr.Api.BaseUrl
 import com.example.wsr.Api.CatalogItem
 import com.example.wsr.Api.NewsItem
 import com.example.wsr.databinding.FragmentMenuBinding
@@ -25,6 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
 
 
+/*
 class MenuFragment : Fragment() {
 
     private lateinit var menuAdapter: MenuAdapter
@@ -103,3 +103,5 @@ class MenuFragment : Fragment() {
     }
 
 }
+
+ */

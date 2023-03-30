@@ -11,7 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.navigation.fragment.findNavController
-import com.example.wsr.MainMenu.MenuFragment
+//import com.example.wsr.MainMenu.MenuFragment
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentUserBinding
 

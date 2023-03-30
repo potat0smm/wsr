@@ -14,7 +14,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.wsr.Api.BaseUrl
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCodeBinding
 import kotlinx.coroutines.CoroutineScope
@@ -154,7 +153,22 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
         super.onDestroyView()
         binding = null
     }
+   companion object {
+        const val CODE_KEY = "code"
+        const val EMAIL_KEY = "email"
+
+        fun newInstance(email: String, code: String?): CodeFragment {
+            val args = Bundle().apply {
+                putString(EMAIL_KEY, email)
+                code?.let { putString(CODE_KEY, it) }
+            }
+            val fragment = CodeFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }
+
 /*  private fun setUpEditText(){
       edit1.addTextChangedListener(GenericTextWatcher(edit1,edit2))
       edit1.addTextChangedListener(GenericTextWatcher(edit2,edit3))
@@ -162,60 +176,52 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
       edit1.addTextChangedListener(GenericTextWatcher(edit4,null))
   }*/
 
-   /* inner class GenericTextWatcher(private val currentView:View,
-                                   private val nextView:View?) : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        }
-
-        override fun afterTextChanged(etitable: Editable) {
-            val text = etitable.toString()
-            if (text.length == 1 && nextView != null){
-                nextView.requestFocus()
-            }
-            if (edit1.text.toString().isNotEmpty()&&
-                    edit2.text.toString().isNotEmpty()&&
-                    edit3.text.toString().isNotEmpty()&&
-                    edit4.text.toString().isNotEmpty()
-            )
-                findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
-        }
-    }*/
-
-
-    /* private fun isInputValid(): Boolean{
-         val input1 = binding.OTP1.text.toString().trim()
-         val input2 = binding.OTP2.text.toString().trim()
-         val input3 = binding.OTP4.text.toString().trim()
-         val input4 = binding.OTP3.text.toString().trim()
-
-         if(input1.isEmpty()|| input2.isEmpty()|| input3.isEmpty()||input4.isEmpty()){
-             return false
+/* inner class GenericTextWatcher(private val currentView:View,
+                                private val nextView:View?) : TextWatcher {
+     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+     }
+     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+     }
+     override fun afterTextChanged(etitable: Editable) {
+         val text = etitable.toString()
+         if (text.length == 1 && nextView != null){
+             nextView.requestFocus()
          }
+         if (edit1.text.toString().isNotEmpty()&&
+                 edit2.text.toString().isNotEmpty()&&
+                 edit3.text.toString().isNotEmpty()&&
+                 edit4.text.toString().isNotEmpty()
+         )
+             findNavController().navigate(R.id.action_codeFragment_to_passwordFragment)
+     }
+ }*/
 
-         if(!TextUtils.isDigitsOnly(input1)|| !TextUtils.isDigitsOnly(input2)||!TextUtils.isDigitsOnly(input3)|| !TextUtils.isDigitsOnly(input4)){
-             return false
-         }
-         return true
 
-     }*/
+/* private fun isInputValid(): Boolean{
+     val input1 = binding.OTP1.text.toString().trim()
+     val input2 = binding.OTP2.text.toString().trim()
+     val input3 = binding.OTP4.text.toString().trim()
+     val input4 = binding.OTP3.text.toString().trim()
+     if(input1.isEmpty()|| input2.isEmpty()|| input3.isEmpty()||input4.isEmpty()){
+         return false
+     }
+     if(!TextUtils.isDigitsOnly(input1)|| !TextUtils.isDigitsOnly(input2)||!TextUtils.isDigitsOnly(input3)|| !TextUtils.isDigitsOnly(input4)){
+         return false
+     }
+     return true
+ }*/
 
 
 /*
 class VerificationFragment : Fragment() {
-
     private lateinit var viewModel: VerificationViewModel
     private lateinit var inputLayouts: List<TextInputLayout>
     private lateinit var inputEditTexts: List<TextInputEditText>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_verification, container, false)
-
         // Получаем ссылки на View
         inputLayouts = listOf(
             view.findViewById(R.id.input_layout_1),
@@ -223,16 +229,13 @@ class VerificationFragment : Fragment() {
             view.findViewById(R.id.input_layout_3),
             view.findViewById(R.id.input_layout_4)
         )
-
         inputEditTexts = listOf(
             view.findViewById(R.id.input_edit_text_2),
             view.findViewById(R.id.input_edit_text_3),
             view.findViewById(R.id.input_edit_text_4)
         )
-
         // Получаем ссылку на ViewModel
         viewModel = ViewModelProvider(this).get(VerificationViewModel::class.java)
-
         // Подписываемся на изменение состояния ViewModel
         viewModel.isValid.observe(viewLifecycleOwner, Observer { isValid ->
             if (isValid) {
@@ -242,21 +245,16 @@ class VerificationFragment : Fragment() {
                 inputLayouts.forEach { it.error = "Неверный код" }
             }
         })
-
         // Слушатель изменения текста в EditText'ах
         val textWatcher = VerificationTextWatcher(viewModel)
-
         // Назначаем слушатель для каждого EditText'а
         inputEditTexts.forEachIndexed { index, editText ->
             editText.addTextChangedListener(textWatcher)
-
             // Назначаем фокус на первый EditText
             if (index == 0) editText.requestFocus()
         }
-
         return view
     }
-
 }
  */
 
@@ -264,7 +262,6 @@ class VerificationFragment : Fragment() {
 /*
 @Suppress("DEPRECATION")
 class CodeFragment : Fragment(R.layout.fragment_code) {
-
     private lateinit var timerTextView: TextView
     private lateinit var editTextList: List<EditText>
     private lateinit var countDownTimer: CountDownTimer
@@ -272,8 +269,6 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
     //private val verificationCode = "1234"
     private var binding: FragmentCodeBinding? = null
     private var email: String = ""
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -324,7 +319,6 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                 val apiService = api.apiService
                 val requestBody = JSONObject()
                 requestBody.put("code", editTextList.joinToString("") { it.text.toString() })
-
                 val response = apiService.signIn(email, requestBody.toString())
                 if (response.isSuccessful) {
                     // Переход на следующий фрагмент
@@ -355,7 +349,6 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
             }
         }
     }
-
     inner class CodeTextWatcher(
         private val nextEditText: EditText?,
         private val prevEditText: EditText?,

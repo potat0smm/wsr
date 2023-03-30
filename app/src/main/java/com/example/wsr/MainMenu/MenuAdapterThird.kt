@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wsr.Api.Catalog
 import com.example.wsr.Api.CatalogItem
-import com.example.wsr.ManyFragment.MainFragment
+//import com.example.wsr.ManyFragment.MainFragment
 import com.example.wsr.ManyFragment.MainFragmentDirections
 import com.example.wsr.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
