@@ -8,15 +8,10 @@ import com.example.wsr.Api.RetrofitClient
 import com.example.wsr.Api.SingInResponse
 import kotlinx.coroutines.launch
 
-class SignInViewModel:ViewModel() {
-    private val apiService = RetrofitClient.apiService
-    private val _signInResponse = MutableLiveData<SingInResponse>()
-    val signInResponse: LiveData<SingInResponse> = _signInResponse
+class SignInViewModel : ViewModel() {
+    var token: String? = null
 
-    fun signIn(email: String, code:String,token:String){
-        viewModelScope.launch {
-            val response = apiService.signIn(email,code,token)
-            _signInResponse.postValue(response.body())
-        }
+    fun saveToken(token: String) {
+        this.token = token
     }
 }

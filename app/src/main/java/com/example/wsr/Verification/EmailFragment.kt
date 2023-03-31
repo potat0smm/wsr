@@ -10,22 +10,19 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.wsr.Api.CodeResponse
-import com.example.wsr.Api.Email
 import com.example.wsr.Api.RetrofitClient
+import com.example.wsr.Api.sendCode
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentEmailBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
 class EmailFragment : Fragment() {
 
     private val apiService = RetrofitClient.apiService
     private var _binding: FragmentEmailBinding? = null
     private val binding get() = _binding!!
-
+    private  var verificationCode:String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +31,6 @@ class EmailFragment : Fragment() {
         _binding =  FragmentEmailBinding.inflate(layoutInflater,container,false)
         // авторизация
         signUp()
-        sendCode()
         return binding.root
     }
     private fun validateForm(): Boolean {
@@ -58,14 +54,13 @@ class EmailFragment : Fragment() {
         return false
     }
     private fun sendCode(){
-        val email = binding.editText.text.toString()
+       val email = binding.editText.text.toString()
         //асинхронный запрос sendCode() с библиотекой RETROFIT, отправляет email на сервер чтоб получить код поддтверждения
-        apiService.sendCode(email).enqueue(object : Callback<CodeResponse> {
-            override fun onResponse(call: Call<CodeResponse>, response: Response<CodeResponse>) {
+        apiService.sendCode(email).enqueue(object : Callback<sendCode> {
+            override fun onResponse(call: Call<sendCode>, response: Response<sendCode>) {
                 //если 200, то получаем код и передаем его в CodeFragment (email и code)
                 if (response.isSuccessful) {
-                    val code = response.body()?.code
-                    val codeFragment = CodeFragment.newInstance(email, code)
+                    val codeFragment = CodeFragment.newInstance(email)
                     parentFragmentManager.beginTransaction()
                         //если код отправлен, то переход с этими данными в другой фрагмент
                         .replace(R.id.fragmentContainerView, codeFragment)
@@ -74,15 +69,13 @@ class EmailFragment : Fragment() {
                         .commit()
                     // в случае успешной отправки
                     Toast.makeText(requireContext(), response.body()?.message, Toast.LENGTH_SHORT).show()
-
                 }else{
                     //в случае огшибки
                     Toast.makeText(requireContext(),"error", Toast.LENGTH_SHORT).show()
                 }
             }
             //ошибка
-            override fun onFailure(call: Call<CodeResponse>, t: Throwable) {
-
+            override fun onFailure(call: Call<sendCode>, t: Throwable) {
             }
         })
     }
@@ -104,6 +97,7 @@ class EmailFragment : Fragment() {
             binding.materialButton.setOnClickListener {
                 val action = EmailFragmentDirections.actionEmailFragmentToCodeFragment()
                 findNavController().navigate(action)
+                sendCode()
             }
         }
     }

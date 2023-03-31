@@ -1,16 +1,22 @@
 package com.example.wsr.Api
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class CodeResponse(
-    @SerializedName("message")
-    val message: String,
+@Parcelize
+data class signIn(
     @SerializedName("code")
     val code: String,
     @SerializedName("error")
-    val error: String
-)
-data class Email(
+    val error: String,
+    @SerializedName("token")
+    val token:String
+):Parcelable
+@Parcelize
+ data class sendCode(
     @SerializedName("email")
-    val email: String
-)
+    val email: String,
+    @SerializedName("message")
+    val message: String
+):Parcelable

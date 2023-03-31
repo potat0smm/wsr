@@ -16,13 +16,13 @@ interface ApiService {
 
     @POST ("api/sendCode")
     @Headers("Content-Type: application/json")
-    fun sendCode(@Header("email") email: String):Call<CodeResponse>
+    fun sendCode(@Header("email") email: String):Call<sendCode>
 
     @POST("api/signin")
-    suspend fun signIn(
+    @Headers("Content-Type: application/json")
+    fun signIn(
         @Header("email") email: String,
-        @Header("code") code: String,
-        @Header("token") token:String
-    ): Response<SingInResponse>
+        @Header("code") code: String
+    ): Call<signIn>
 
 }
