@@ -25,4 +25,27 @@ interface ApiService {
         @Header("code") code: String
     ): Call<signIn>
 
+    @POST("api/createProfile")
+    @Headers("Content-Type: application/json")
+    fun createUser(
+        @Header("id")id:Int,
+        @Header("firstname")firstname:String,
+        @Header("lastname")lastname:String,
+        @Header("middlename")middlename:String,
+        @Header("bith")bith:String,
+        @Header("pol")pol:String,
+        @Header("image")image:String
+    ):Call<CreateUser>
+
+    @PUT("api/updateProfil")
+    @Headers("Content-Type: application/json")
+    fun updateUser(
+        @Header("firstname") firstname: String,
+        @Header("firstname") lastname: String,
+        @Header("firstname") middlename: String,
+        @Header("firstname") bith: String,
+        @Header("pol") pol:String
+    ):Call<UpdateUser>
+
+
 }

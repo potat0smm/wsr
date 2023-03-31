@@ -88,6 +88,8 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                     if (response.isSuccessful) {
                         val token = response.body()?.token ?: ""
                         signInViewModel.saveToken(token)
+                        //Проверить токен
+                        //Toast.makeText(requireContext(), token,Toast.LENGTH_SHORT).show()
                         val action = CodeFragmentDirections.actionCodeFragmentToPasswordFragment()
                         findNavController().navigate(action)
                     } else {
@@ -145,17 +147,12 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                 if (s?.length == 4 && !timerStarted && editTextList.all { it.text.isNotEmpty() && it.text.isDigitsOnly() }) {
                     navigateToNextFragment()
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Incorrect Verification Code",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), "Incorrect Verification Code", Toast.LENGTH_SHORT).show()
                     // Запускаем таймер на 60 секунд
                     countDownTimer = object : CountDownTimer(60000, 1000) {
                         override fun onTick(millisUntilFinished: Long) {
                             timerStarted = true
-                            timerTextView.text =
-                                "Try again in ${millisUntilFinished / 1000} seconds"
+                            timerTextView.text = "Try again in ${millisUntilFinished / 1000} seconds"
                         }
 
                         override fun onFinish() {

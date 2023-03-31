@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.example.wsr.Api.CatalogItem
 import com.example.wsr.Api.NewsItem
+import com.example.wsr.Api.RetrofitClient
 import com.example.wsr.databinding.FragmentMenuBinding
 import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.launch
@@ -24,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.dsl.module
 
 
-/*
+
 class MenuFragment : Fragment() {
 
     private lateinit var menuAdapter: MenuAdapter
@@ -62,9 +63,9 @@ class MenuFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val apiClient = BaseUrl()
+        val apiClient = RetrofitClient.apiService
         lifecycleScope.launch {
-            val response = apiClient.apiService.getCatalog()
+            val response = apiClient.getCatalog()
             if(response.isSuccessful){
                 val catalog = response.body()
                 thirdMenuAdapter.analysisList = catalog?: emptyList()
@@ -73,9 +74,9 @@ class MenuFragment : Fragment() {
                 //error
             }
         }
-        val apiClientFirst = BaseUrl()
+        val apiClientFirst = RetrofitClient.apiService
         lifecycleScope.launch {
-            val responseFirst = apiClientFirst.apiService.getNews()
+            val responseFirst = apiClientFirst.getNews()
             if (responseFirst.isSuccessful){
                 val catalogFirst = responseFirst.body()
                 menuAdapter.menuList = catalogFirst?: emptyList()
@@ -84,9 +85,9 @@ class MenuFragment : Fragment() {
                 //er
             }
         }
-        val apiClientSecond = BaseUrl()
+        val apiClientSecond = RetrofitClient.apiService
         lifecycleScope.launch{
-            val responseSecond = apiClientSecond.apiService.getCatalog()
+            val responseSecond = apiClientSecond.getCatalog()
             if (responseSecond.isSuccessful){
                 val catalogSecond = responseSecond.body()
                 secondMenuAdapter.menuSecondList = catalogSecond?: emptyList()
@@ -103,5 +104,3 @@ class MenuFragment : Fragment() {
     }
 
 }
-
- */

@@ -6,8 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class signIn(
-    @SerializedName("code")
-    val code: String,
     @SerializedName("error")
     val error: String,
     @SerializedName("token")
@@ -15,8 +13,6 @@ data class signIn(
 ):Parcelable
 @Parcelize
  data class sendCode(
-    @SerializedName("email")
-    val email: String,
     @SerializedName("message")
     val message: String
 ):Parcelable
