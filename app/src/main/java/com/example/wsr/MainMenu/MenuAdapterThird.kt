@@ -18,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 
-class MenuAdapterThird(var analysisList: List<CatalogItem>, ) : RecyclerView.Adapter<MenuAdapterThird.AnalysisViewHolder>() {
+class MenuAdapterThird(var analysisList: List<CatalogItem>) : RecyclerView.Adapter<MenuAdapterThird.AnalysisViewHolder>() {
 
     inner class AnalysisViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
@@ -73,6 +73,7 @@ class MenuAdapterThird(var analysisList: List<CatalogItem>, ) : RecyclerView.Ada
                 holder.add.setBackgroundResource(R.drawable.background_button_one)
                 holder.add.setTextColor(Color.parseColor("#FFFFFFFF"))
             }
+
         }
     }
 }

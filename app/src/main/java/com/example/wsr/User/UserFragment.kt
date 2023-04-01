@@ -11,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.navigation.fragment.findNavController
+import com.example.wsr.Api.RetrofitClient
 //import com.example.wsr.MainMenu.MenuFragment
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentUserBinding
@@ -20,6 +21,7 @@ class UserFragment : Fragment() {
 
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
+    private val apiService = RetrofitClient.apiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

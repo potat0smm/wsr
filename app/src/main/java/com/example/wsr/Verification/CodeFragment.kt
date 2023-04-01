@@ -99,9 +99,7 @@ class CodeFragment : Fragment(R.layout.fragment_code) {
                         countDownTimer = object : CountDownTimer(60000, 1000) {
                             override fun onTick(millisUntilFinished: Long) {
                                 // Обновляем текст таймера каждую секунду
-                                timerTextView.text =
-                                    "Отпраивть код повторно можно\n" +
-                                            "будет через ${millisUntilFinished / 1000} секунды"
+                                timerTextView.text = "Отпраивть код повторно можно\n" + "будет через ${millisUntilFinished / 1000} секунды"
                             }
                             override fun onFinish() {
                                 // Сбрасываем текст таймера и разблокируем все EditText
