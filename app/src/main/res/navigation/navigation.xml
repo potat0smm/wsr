@@ -70,10 +70,18 @@
         <action
             android:id="@+id/action_mainFragment_to_bottomSheet"
             app:destination="@id/bottomSheet" />
+        <action
+            android:id="@+id/action_mainFragment_to_basketFragment"
+            app:destination="@id/basketFragment" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheet"
         android:name="com.example.wsr.MainMenu.BottomSheet.BottomSheet"
         android:label="fragment_bottom_sheet"
         tools:layout="@layout/fragment_bottom_sheet" />
+    <fragment
+        android:id="@+id/basketFragment"
+        android:name="com.example.wsr.basket.BasketFragment"
+        android:label="fragment_basket"
+        tools:layout="@layout/fragment_basket" />
 </navigation>

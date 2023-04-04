@@ -25,7 +25,7 @@ class SignInViewModel : ViewModel() {
     ) {
         this.bith = bith
         this.id = id
-        this.pol = this.pol
+        this.pol = pol
         this.firstname = firstname
         this.lastname = lastname
         this.middlename = middlename

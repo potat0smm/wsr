@@ -2,29 +2,20 @@ package com.example.wsr.MainMenu
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import android.widget.FrameLayout
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
-import com.example.wsr.Api.CatalogItem
-import com.example.wsr.Api.NewsItem
 import com.example.wsr.Api.RetrofitClient
+import com.example.wsr.ManyFragment.MainFragmentDirections
 import com.example.wsr.databinding.FragmentMenuBinding
-import kotlinx.coroutines.NonDisposableHandle.parent
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.dsl.module
-
-
 
 class MenuFragment : Fragment() {
 
@@ -32,7 +23,8 @@ class MenuFragment : Fragment() {
     private lateinit var secondMenuAdapter: MenuAdapterSecond
     private lateinit var recyclerView: RecyclerView
     private lateinit var thirdMenuAdapter: MenuAdapterThird
-
+    private lateinit var addBtn: MaterialButton // добавьте это поле
+    private lateinit var FL: FrameLayout
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
@@ -41,11 +33,16 @@ class MenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentMenuBinding.inflate(layoutInflater,container,false)
+        //GoBasket
+        goBasket()
         //third recyclerview
         recyclerView = binding.thirdRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        thirdMenuAdapter = MenuAdapterThird(emptyList())
+        addBtn = binding.addBtn
+        FL = binding.FM
+        thirdMenuAdapter = MenuAdapterThird(emptyList(),addBtn,FL)
         recyclerView.adapter = thirdMenuAdapter
         //first recyclerview
         recyclerView = binding.firstRecyclerView
@@ -57,7 +54,6 @@ class MenuFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false)
         secondMenuAdapter = MenuAdapterSecond(emptyList())
         recyclerView.adapter = secondMenuAdapter
-
         return binding.root
     }
     @SuppressLint("NotifyDataSetChanged")
@@ -98,9 +94,14 @@ class MenuFragment : Fragment() {
         }
     }
 
+    private fun goBasket(){
+        binding.addBtn.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToBasketFragment()
+            findNavController().navigate(action)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

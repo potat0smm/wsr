@@ -88,22 +88,28 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/FM"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:background="@color/white"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
         <com.google.android.material.button.MaterialButton
-            android:layout_width="370dp"
+            android:id="@+id/addBtn"
+            android:layout_width="350dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="19dp"
+            android:layout_gravity="center"
             android:background="@drawable/background_button_one"
-            app:backgroundTint="@null"/>
-    </LinearLayout>
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:text="Добавить в корзину"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

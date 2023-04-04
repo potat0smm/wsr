@@ -27,6 +27,7 @@
         app:menu="@menu/menu"
         app:labelVisibilityMode="labeled"
         app:defaultNavHost="true">
+
 </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

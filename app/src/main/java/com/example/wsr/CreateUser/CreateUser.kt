@@ -18,14 +18,11 @@ import com.example.wsr.Api.createUser
 import com.example.wsr.Api.model.SignInViewModel
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentCreateUserBinding
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.sign
 
 
 class CreateUser : Fragment() {
@@ -52,7 +49,7 @@ class CreateUser : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu, maleFemale)
         binding.autoComplete.setAdapter(arrayAdapter)
 
-        val items = listOf("male", "girl")
+        val items = listOf("Мужской", "Женский")
         val autoComplete: AutoCompleteTextView = binding.autoComplete
         val adapter = ArrayAdapter(requireContext(), R.layout.item_for_auto_complete, items)
 
@@ -79,13 +76,13 @@ class CreateUser : Fragment() {
         val middlename = binding.editPatronymic.text.toString()
         val lastname = binding.editSurname.text.toString()
         val bith = binding.editToBirthday.text.toString()
-        val pol = binding.autoComplete.text.toString()
+        val pol = binding.autoComplete.text.chars()
         GlobalScope.launch {
-            apiService.createUser(id,firstname,lastname,middlename,pol,bith).enqueue(object : Callback<createUser>{
+            apiService.createUser(firstname,lastname,middlename,pol,bith,id).enqueue(object : Callback<createUser>{
                 override fun onResponse(call: Call<createUser>, response: Response<createUser>) {
                     if (response.isSuccessful){
-                        val bith = response.body()?.bith?:""
                         val id = response.body()?.id?:""
+                        val bith = response.body()?.bith?:""
                         val firstname = response.body()?.firstname?:""
                         val lastname = response.body()?.lastname?:""
                         val middlename = response.body()?.middlename?:""
@@ -93,7 +90,7 @@ class CreateUser : Fragment() {
                         signInViewModel.saveUser(id as Int,bith,firstname,lastname,pol,middlename)
                         Toast.makeText(requireContext(),"получилось отправить",Toast.LENGTH_SHORT).show()
                     }else{
-                        Toast.makeText(requireContext(), response.body()?.errors,Toast.LENGTH_SHORT)
+                        Log.e("CreateUser", "Error creating user: ${response.code()} - ${response.message()}")
                     }
                 }
                 override fun onFailure(call: Call<createUser>, t: Throwable) {
@@ -102,6 +99,7 @@ class CreateUser : Fragment() {
             })
         }
     }
+
         override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

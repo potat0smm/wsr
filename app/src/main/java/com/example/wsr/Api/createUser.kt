@@ -8,8 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class createUser(
     @SerializedName("errors")
     val errors:String,
-    @SerializedName("id")
-    val id: Int,
     @SerializedName("bith")
     val bith: String,
     @SerializedName("firstname")
@@ -21,5 +19,7 @@ data class createUser(
     @SerializedName("middlename")
     val middlename: String,
     @SerializedName("pol")
-    val pol: String
+    val pol: String,
+    @SerializedName("id")
+    val id: Int
 ):Parcelable
