@@ -15,4 +15,4 @@ data class CatalogItem(
     val bio: String,
     var isAddedToCart: Boolean,
     var button: Boolean
-)
+    )

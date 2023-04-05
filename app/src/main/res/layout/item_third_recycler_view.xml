@@ -35,9 +35,9 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="75dp"
             android:text="ПЦР-тест на оперделение РНК\nкоронавируса стандартный"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="200dp"
+            android:layout_marginEnd="300dp"
             android:text="2 дня"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,14 +61,14 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="307dp"
+            android:layout_marginEnd="295dp"
             android:text="1800 ₽"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeResult" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

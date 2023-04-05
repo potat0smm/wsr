@@ -78,7 +78,6 @@ class MenuAdapterThird(var analysisList: List<CatalogItem>, val addBtn: Material
                 holder.add.setBackgroundResource(R.drawable.background_button_one)
                 holder.add.setTextColor(Color.parseColor("#FFFFFFFF"))
             }
-
         }
     }
 }
