@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.wsr.databinding.FragmentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -31,13 +32,10 @@ open class BottomSheet : BottomSheetDialogFragment() {
         binding.save.setOnClickListener {
            // findNavController().popBackStack(R.id.menuFragment2,false)
             //findNavController().navigate(R.id.action_bottomSheet_to_bottomSheetGoBasket)
-
         }
 
-
-
         binding.close.setOnClickListener{
-      //      findNavController().popBackStack(R.id.menuFragment2,false)
+            findNavController().popBackStack()
         }
 
         return binding.root

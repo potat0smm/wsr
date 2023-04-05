@@ -44,7 +44,7 @@ class UserFragment : Fragment() {
 
         val items = listOf("Мужчина", "Девушка")
         val autoCompleteUser: AutoCompleteTextView = binding.autoCompleteUser
-        val adapter = ArrayAdapter(requireContext(),R.layout.fragment_user,items)
+        val adapter = ArrayAdapter(requireContext(),R.layout.item_for_auto_complete,items)
         autoCompleteUser.setAdapter(adapter)
 
         autoCompleteUser.onItemClickListener = AdapterView.OnItemClickListener{adapterView, view, i, l->
