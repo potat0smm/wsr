@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wsr.Api.RetrofitClient
@@ -33,6 +34,7 @@ class BasketFragment : Fragment() {
 
             }
         }
+
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +42,16 @@ class BasketFragment : Fragment() {
     ): View? {
         _binding = FragmentBasketBinding.inflate(layoutInflater,container,false)
 
+        binding.goInOrder.setOnClickListener {
+            val action = BasketFragmentDirections.actionBasketFragmentToByFragment2()
+            findNavController().navigate(action)
+        }
+
         reyclerview = binding.basketRecyclerView
         reyclerview.layoutManager = LinearLayoutManager(requireContext())
         reyclerview.adapter = AdapterRecyclerViewBasket(emptyList())
         return binding.root
     }
+
 
 }

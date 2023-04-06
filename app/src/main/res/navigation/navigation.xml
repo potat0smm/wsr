@@ -83,5 +83,23 @@
         android:id="@+id/basketFragment"
         android:name="com.example.wsr.basket.BasketFragment"
         android:label="fragment_basket"
-        tools:layout="@layout/fragment_basket" />
+        tools:layout="@layout/fragment_basket" >
+        <action
+            android:id="@+id/action_basketFragment_to_byFragment2"
+            app:destination="@id/byFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/byFragment2"
+        android:name="com.example.wsr.Buy.ByFragment"
+        android:label="fragment_by"
+        tools:layout="@layout/fragment_by" >
+        <action
+            android:id="@+id/action_byFragment2_to_finishFragment"
+            app:destination="@id/finishFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishFragment"
+        android:name="com.example.wsr.Finish.FinishFragment"
+        android:label="fragment_finish"
+        tools:layout="@layout/fragment_finish" />
 </navigation>

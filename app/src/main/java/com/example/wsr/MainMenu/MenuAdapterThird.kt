@@ -46,6 +46,8 @@ class MenuAdapterThird(var analysisList: List<CatalogItem>, val addBtn: Material
         holder.price.text = item.price
         holder.timeResult.text = item.time_result
 
+
+
         holder.itemView.setOnClickListener {view->
             val action = MainFragmentDirections.actionMainFragmentToBottomSheet()
             view.findNavController().navigate(action)
@@ -64,6 +66,8 @@ class MenuAdapterThird(var analysisList: List<CatalogItem>, val addBtn: Material
         holder.add.setOnClickListener {
 
             item.isAddedToCart = !item.isAddedToCart // изменение состояния элемента списка
+            //onButtonClicked(item)
+
 
             if (item.isAddedToCart) {
                 holder.add.text = "Убрать"

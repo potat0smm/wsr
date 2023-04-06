@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/basket_recyclerView" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton2"
+        android:id="@+id/go_in_order"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"

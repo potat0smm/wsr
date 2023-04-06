@@ -15,10 +15,9 @@ open class BottomSheet : BottomSheetDialogFragment() {
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -28,20 +27,13 @@ open class BottomSheet : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
 
-
         binding.save.setOnClickListener {
            // findNavController().popBackStack(R.id.menuFragment2,false)
             //findNavController().navigate(R.id.action_bottomSheet_to_bottomSheetGoBasket)
         }
-
         binding.close.setOnClickListener{
             findNavController().popBackStack()
         }
-
         return binding.root
     }
-
-
-
-
 }
