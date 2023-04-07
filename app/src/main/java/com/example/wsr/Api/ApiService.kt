@@ -10,6 +10,9 @@ interface ApiService {
     @GET("api/catalog")
     suspend fun getCatalog(): Response<List<CatalogItem>>
 
+    @GET("api/catalog")
+    fun getCategory(@Header("category")category:String):Response<List<CatalogItem>>
+
     @GET("api/catalog/{id}")
     suspend fun getItemById(@Path("id")id:Int):CatalogItem
     @GET("api/news")
@@ -46,6 +49,5 @@ interface ApiService {
         @Header("firstname") bith: String,
         @Header("pol") pol:String
     ):Call<UpdateUser>
-
 
 }

@@ -34,7 +34,6 @@ class BasketFragment : Fragment() {
 
             }
         }
-
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +45,9 @@ class BasketFragment : Fragment() {
             val action = BasketFragmentDirections.actionBasketFragmentToByFragment2()
             findNavController().navigate(action)
         }
-
         reyclerview = binding.basketRecyclerView
         reyclerview.layoutManager = LinearLayoutManager(requireContext())
         reyclerview.adapter = AdapterRecyclerViewBasket(emptyList())
         return binding.root
     }
-
-
 }
