@@ -15,12 +15,7 @@ import com.example.wsr.ManyFragment.MainFragmentDirections
 import com.example.wsr.R
 import com.google.android.material.button.MaterialButton
 
-class MenuAdapterThird(
-    var analysisList: List<CatalogItem>,
-    val addBtn: MaterialButton,
-    val FL: FrameLayout,
-    val sharedViewModel: SharedViewModel // Добавляем SharedViewModel в конструктор
-) : RecyclerView.Adapter<MenuAdapterThird.AnalysisViewHolder>() {
+class MenuAdapterThird(var analysisList: List<CatalogItem>, val addBtn: MaterialButton, val FL: FrameLayout, ) : RecyclerView.Adapter<MenuAdapterThird.AnalysisViewHolder>() {
 
     inner class AnalysisViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
@@ -77,9 +72,6 @@ class MenuAdapterThird(
                 holder.add.setBackgroundResource(R.drawable.background_button_one)
                 holder.add.setTextColor(Color.parseColor("#FFFFFFFF"))
             }
-
-            // Обновляем состояние элемента списка в SharedViewModel
-            sharedViewModel.updateSelectedItem(item)
         }
     }
 }

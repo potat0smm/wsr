@@ -96,10 +96,18 @@
         <action
             android:id="@+id/action_byFragment2_to_finishFragment"
             app:destination="@id/finishFragment" />
+        <action
+            android:id="@+id/action_byFragment2_to_bottomSheetAddress"
+            app:destination="@id/bottomSheetAddress" />
     </fragment>
     <fragment
         android:id="@+id/finishFragment"
         android:name="com.example.wsr.Finish.FinishFragment"
         android:label="fragment_finish"
         tools:layout="@layout/fragment_finish" />
+    <dialog
+        android:id="@+id/bottomSheetAddress"
+        android:name="com.example.wsr.Buy.BottomSheetAddress"
+        android:label="fragment_bottom_sheet_address"
+        tools:layout="@layout/fragment_bottom_sheet_address" />
 </navigation>

@@ -31,6 +31,10 @@ class ByFragment : Fragment() {
             val action = ByFragmentDirections.actionByFragment2ToFinishFragment()
             findNavController().navigate(action)
         }
+        binding.addressEdit.setOnClickListener{
+            val action = ByFragmentDirections.actionByFragment2ToBottomSheetAddress()
+            findNavController().navigate(action)
+        }
 
         return binding.root
     }
