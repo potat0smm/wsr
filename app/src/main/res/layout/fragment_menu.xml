@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             >
 
@@ -43,7 +43,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="260dp"
                 android:paddingLeft="10dp"
                 android:text="Акции и новости"
@@ -71,8 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:clipToPadding="false"
-                android:paddingTop="@dimen/_20sdp"
-                android:paddingBottom="@dimen/_20sdp"
+
+                android:paddingBottom="5dp"
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cataalog" />

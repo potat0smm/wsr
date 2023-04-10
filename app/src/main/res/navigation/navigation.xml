@@ -118,5 +118,9 @@
         android:id="@+id/checkFragment"
         android:name="com.example.wsr.Finish.CheckFragment"
         android:label="fragment_chek"
-        tools:layout="@layout/fragment_chek" />
+        tools:layout="@layout/fragment_chek" >
+        <action
+            android:id="@+id/action_checkFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

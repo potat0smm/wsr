@@ -27,7 +27,8 @@ class CheckFragment : Fragment() {
         _binding = FragmentChekBinding.inflate(layoutInflater,container,false)
 
         binding.backInMenu.setOnClickListener {
-            //findNavController().navigate()
+            val action = CheckFragmentDirections.actionCheckFragmentToMainFragment()
+            findNavController().navigate(action)
         }
 
 
