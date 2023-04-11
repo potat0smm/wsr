@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.wsr.databinding.FragmentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -14,6 +16,8 @@ open class BottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: FragmentBottomSheetBinding? = null
     private val binding get() = _binding!!
+    private lateinit var  recyclerview: RecyclerView
+    private lateinit var menuAdapter: AdapterBottomSheet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +30,12 @@ open class BottomSheet : BottomSheetDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
+        val itemId = arguments?.getInt("id",-1)
+        if (itemId!=null && itemId!=-1){
 
-        binding.save.setOnClickListener {
+        }
+
+        binding.saveInBasket.setOnClickListener {
            // findNavController().popBackStack(R.id.menuFragment2,false)
             //findNavController().navigate(R.id.action_bottomSheet_to_bottomSheetGoBasket)
         }

@@ -1,5 +1,8 @@
 package com.example.wsr.MainMenu
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,22 +14,32 @@ import com.example.wsr.databinding.ItemSecondRecyclerViewBinding
 
 class MenuAdapterSecond(private val onItemClick: (String) -> Unit):RecyclerView.Adapter<MenuAdapterSecond.SecondMenuViewHolder>(){
 
-    private val filterItems = mutableListOf("Популярный", "COVID", "Онкогенетические", "ЗОЖ")
+    private val filterItems = mutableListOf("Популярные", "COVID", "Онкогенетические", "ЗОЖ")
     private var selectedFilter: String? = null
 
     inner class SecondMenuViewHolder(private val binding: ItemSecondRecyclerViewBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bind(filterItem: String) {
-            binding.category.text = filterItem
+        @SuppressLint("NotifyDataSetChanged")
+        fun bind(category: String) {
+            binding.category.text = category
+            if(category == selectedFilter){
+                binding.root.setCardBackgroundColor(Color.parseColor("#F5F5F9"))
+                binding.category.setTextColor(Color.parseColor("#7E7E9A"))
+            }else{
+                binding.root.setCardBackgroundColor(Color.parseColor("#1A6FEE"))
+                binding.category.setTextColor(Color.parseColor("#FFFFFF"))
+            }
+
             binding.root.setOnClickListener {
-                selectedFilter = filterItem
-                onItemClick(filterItem)
-                notifyDataSetChanged()
+                val filter = selectedFilter
+                selectedFilter = category
+                onItemClick(category)
+                if(filter!=null){
+                    notifyItemChanged(filterItems.indexOf(filter))
+                }
+                notifyItemChanged(filterItems.indexOf(category))
             }
         }
-
-
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SecondMenuViewHolder {
         val inflate = LayoutInflater.from(parent.context)

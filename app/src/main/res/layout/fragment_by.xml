@@ -52,7 +52,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Адрес *"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/editText2"
+                app:layout_constraintBottom_toTopOf="@+id/address_edit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -67,6 +67,7 @@
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
+                android:inputType="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address" />
@@ -84,7 +85,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/address_edit" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/editTime"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
@@ -94,6 +95,7 @@
                 android:textColorHint="@color/black"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
+                android:inputType="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -108,17 +110,28 @@
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText3" />
+                app:layout_constraintTop_toBottomOf="@+id/editTime" />
 
-            <EditText
-                android:id="@+id/editText4"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
                 android:layout_width="350dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edit_text"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="50dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView30">
+
+                <AutoCompleteTextView
+                    android:id="@+id/male_female"
+                    android:paddingLeft="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text"
+                    android:inputType="none"
+                    android:layout_weight="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/materialButton3"
@@ -132,7 +145,7 @@
                 app:backgroundTint="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
             <TextView
                 android:id="@+id/textView31"
@@ -151,6 +164,7 @@
                 android:layout_width="350dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="5dp"
+                android:paddingLeft="15dp"
                 android:background="@drawable/edit_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -178,6 +192,8 @@
                 android:textAllCaps="false"
                 android:textColor="#939396"
                 android:textSize="11sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView32" />

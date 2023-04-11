@@ -1,5 +1,6 @@
 package com.example.wsr.MainMenu
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +16,17 @@ import com.example.wsr.ManyFragment.MainFragmentDirections
 import com.example.wsr.R
 import com.google.android.material.button.MaterialButton
 
-class MenuAdapterThird(var analysisList: List<CatalogItem>, val addBtn: MaterialButton, val FL: FrameLayout, ) : RecyclerView.Adapter<MenuAdapterThird.AnalysisViewHolder>() {
+class MenuAdapterThird(var analysisList: List<CatalogItem>,val addBtn: MaterialButton, val FL: FrameLayout,val onItemClicked:(itemId:Int)->Unit) : RecyclerView.Adapter<MenuAdapterThird.AnalysisViewHolder>() {
 
     inner class AnalysisViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name)
         val price: TextView = itemView.findViewById(R.id.price)
         val timeResult: TextView = itemView.findViewById(R.id.timeResult)
         val add: MaterialButton = itemView.findViewById(R.id.add_menu)
+
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnalysisViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_third_recycler_view, parent, false)
@@ -41,8 +44,7 @@ class MenuAdapterThird(var analysisList: List<CatalogItem>, val addBtn: Material
         holder.timeResult.text = item.time_result
 
         holder.itemView.setOnClickListener { view ->
-            val action = MainFragmentDirections.actionMainFragmentToBottomSheet()
-            view.findNavController().navigate(action)
+            onItemClicked.invoke(item.id)
         }
 
         if (item.isAddedToCart) {
