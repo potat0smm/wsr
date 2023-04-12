@@ -13,6 +13,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.app.NotificationCompat.getCategory
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -26,6 +27,7 @@ import com.example.wsr.ManyFragment.MainFragmentDirections
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentMenuBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
@@ -73,7 +75,6 @@ class MenuFragment : Fragment() {
             thirdMenuAdapter.notifyDataSetChanged()
             recyclerViewThird.adapter = thirdMenuAdapter
             // Handle item click
-            // Call nigga() function or perform any other action
         }
         recyclerViewSecond.adapter = secondMenuAdapter
 
@@ -82,7 +83,6 @@ class MenuFragment : Fragment() {
         recyclerViewThird.layoutManager = LinearLayoutManager(requireContext())
         addBtn = binding.addBtn
         FL = binding.FM
-
 
         // Set up click listener for Add button
         goBasket()
@@ -114,7 +114,6 @@ class MenuFragment : Fragment() {
         return binding.root
     }
 
-
     private fun showBottomSheetDialog(itemId:Int){
         val bottomSheet = BottomSheetDialog(requireContext())
         val bottomSheetView = layoutInflater.inflate(R.layout.fragment_bottom_sheet,null)
@@ -128,11 +127,8 @@ class MenuFragment : Fragment() {
 
         thirdMenuAdapter = MenuAdapterThird(emptyList(),addBtn,FL){ itemId ->
             showBottomSheetDialog(itemId)
-            //  val action = MainFragmentDirections.actionMainFragmentToBottomSheet()
-            // findNavController().navigate(action)
         }
         recyclerViewThird.adapter = thirdMenuAdapter
-
 
         val apiClient = RetrofitClient.apiService
         lifecycleScope.launch {
@@ -165,6 +161,7 @@ class MenuFragment : Fragment() {
     }
 
     private fun goBasket() {
+        val addBtn = binding.addBtn
 
         binding.addBtn.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToBasketFragment()
@@ -194,3 +191,5 @@ class MenuFragment : Fragment() {
         return list
     }
 }
+//  val action = MainFragmentDirections.actionMainFragmentToBottomSheet()
+// findNavController().navigate(action)

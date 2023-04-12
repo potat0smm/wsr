@@ -35,9 +35,8 @@ class UserFragment : Fragment() {
         _binding = FragmentUserBinding.inflate(inflater,container,false)
 
         binding.addUser.setOnClickListener {
-
+            
         }
-
         val male = resources.getStringArray(R.array.MaleFemale)
         val arrayAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu,male)
         binding.autoCompleteUser.setAdapter(arrayAdapter)

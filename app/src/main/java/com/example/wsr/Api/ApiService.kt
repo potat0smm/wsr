@@ -14,7 +14,7 @@ interface ApiService {
     suspend fun getCategory(@Header("category")category:String):Response<List<CatalogItem>>
 
     @GET("api/catalog/{id}")
-    suspend fun getItemById(@Path("id")id:Int):CatalogItem
+    suspend fun getItemById(@Header("id")id:Int):CatalogItem
     @GET("api/news")
     suspend fun getNews(): Response<List<NewsItem>>
 

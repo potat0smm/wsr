@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/img_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="210dp"
+            android:layout_height="170dp"
             android:src="@drawable/item_firsman"
             android:layout_marginStart="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,8 +26,9 @@
 
         <TextView
             android:id="@+id/first_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="13dp"
             android:text="Чек-ап для\nмужчин"
             android:textColor="@color/white"
@@ -38,19 +39,21 @@
 
         <TextView
             android:id="@+id/title_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="113dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:text="9 исследований"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/img_first"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/first_name" />
 
         <TextView
             android:id="@+id/price_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
             android:text="8000 ₽"
             android:textColor="@color/white"
             android:textStyle="bold"
