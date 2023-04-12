@@ -1,8 +1,13 @@
 package com.example.wsr.User
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +20,15 @@ import com.example.wsr.Api.RetrofitClient
 //import com.example.wsr.MainMenu.MenuFragment
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentUserBinding
+import java.io.FileNotFoundException
+import java.io.InputStream
 
 
+@Suppress("DEPRECATION")
 class UserFragment : Fragment() {
+
+    private val REQUEST_IMAGE_CAPTURE = 1
+
 
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
@@ -27,15 +38,12 @@ class UserFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
     @SuppressLint("ResourceType")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentUserBinding.inflate(inflater,container,false)
 
         binding.addUser.setOnClickListener {
-            
+
         }
         val male = resources.getStringArray(R.array.MaleFemale)
         val arrayAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.id.dropdown_menu,male)
@@ -49,6 +57,34 @@ class UserFragment : Fragment() {
         autoCompleteUser.onItemClickListener = AdapterView.OnItemClickListener{adapterView, view, i, l->
             adapterView.getItemAtPosition(i)
         }
+
+        binding.imageUser.setOnClickListener {
+            openGallery()
+        }
+
+
         return binding.root
     }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK && data != null) {
+            val imageUri: Uri? = data.data
+            try {
+                val inputStream: InputStream? = imageUri?.let { context?.contentResolver?.openInputStream(it) }
+                val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
+                binding.imageUser.setImageBitmap(bitmap)
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
+
 }

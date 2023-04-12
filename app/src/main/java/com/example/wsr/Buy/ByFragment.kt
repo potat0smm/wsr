@@ -1,14 +1,17 @@
 package com.example.wsr.Buy
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import com.example.wsr.R
 import com.example.wsr.databinding.FragmentByBinding
@@ -48,10 +51,12 @@ class ByFragment : Fragment() {
             val action = ByFragmentDirections.actionByFragment2ToFinishFragment()
             findNavController().navigate(action)
         }
+        val editText = binding.addressEdit
         binding.addressEdit.setOnClickListener{
-
             val action = ByFragmentDirections.actionByFragment2ToBottomSheetAddress()
             findNavController().navigate(action)
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(editText.windowToken, 0)
         }
         return binding.root
     }
