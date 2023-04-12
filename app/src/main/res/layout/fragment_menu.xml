@@ -106,7 +106,7 @@
             android:background="@drawable/background_button_one"
             android:padding="16dp"
             app:iconGravity="start"
-            app:icon="@drawable/basket_icon"
+            app:icon="@drawable/basket_button"
             android:text="500Р"
             android:textAllCaps="false"
             android:gravity="end"/>
