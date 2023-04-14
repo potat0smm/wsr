@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background=""
     tools:context=".Buy.BottomSheetTime">
 
     <TextView
@@ -67,6 +68,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -76,4 +78,98 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout1" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/material10"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="10:00"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/material13"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="13:00"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toEndOf="@+id/material10"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton6"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:text="14:00"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toEndOf="@+id/material13"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        android:text="15:00"
+        app:layout_constraintStart_toEndOf="@+id/materialButton6"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton7"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        android:text="16:00"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/material10" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton8"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        android:text="18:00"
+        app:layout_constraintStart_toEndOf="@+id/materialButton7"
+        app:layout_constraintTop_toBottomOf="@+id/material13" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/material19"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_time"
+        app:backgroundTint="@null"
+        android:text="19:00"
+        app:layout_constraintStart_toEndOf="@+id/materialButton8"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton6" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="370dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_button_one"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Подтвердить"
+        android:textSize="17sp"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/material19" />
 </androidx.constraintlayout.widget.ConstraintLayout>
