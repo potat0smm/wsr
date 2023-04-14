@@ -31,5 +31,9 @@
     <style name="MyBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+    
+    <style name="CustomBottomSheetBack" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:background">@drawable/radius_for_bottom_sheet</item>
+    </style>
 
 </resources>

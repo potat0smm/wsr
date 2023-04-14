@@ -57,7 +57,16 @@ class ByFragment : Fragment() {
             findNavController().navigate(action)
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(editText.windowToken, 0)
+
+
+
+            binding.editTime.setOnClickListener{
+                val action = ByFragmentDirections.actionByFragment2ToBottomSheetTime()
+                findNavController().navigate(action)
+            }
         }
         return binding.root
+
+
     }
 }

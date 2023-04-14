@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
+    android:background="@drawable/radius_for_bottom_sheet"
+    android:backgroundTint="@null"
     tools:context=".Buy.BottomSheetTime">
 
     <TextView
@@ -83,10 +84,11 @@
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="@color/white"
         android:layout_marginTop="25dp"
         android:text="10:00"
         android:background="@drawable/background_time"
-        app:backgroundTint="@null"
+        android:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -96,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
+        android:textColor="@color/white"
         android:text="13:00"
         android:background="@drawable/background_time"
         app:backgroundTint="@null"
@@ -106,6 +109,7 @@
         android:id="@+id/materialButton6"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
         android:text="14:00"
@@ -118,6 +122,7 @@
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="@color/white"
         android:layout_marginTop="25dp"
         android:background="@drawable/background_time"
         app:backgroundTint="@null"
@@ -132,6 +137,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/background_time"
+        android:textColor="@color/white"
         app:backgroundTint="@null"
         android:text="16:00"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,6 +151,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/background_time"
         app:backgroundTint="@null"
+        android:textColor="@color/white"
         android:text="18:00"
         app:layout_constraintStart_toEndOf="@+id/materialButton7"
         app:layout_constraintTop_toBottomOf="@+id/material13" />
@@ -158,6 +165,7 @@
         android:background="@drawable/background_time"
         app:backgroundTint="@null"
         android:text="19:00"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/materialButton8"
         app:layout_constraintTop_toBottomOf="@+id/materialButton6" />
 
@@ -169,6 +177,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Подтвердить"
         android:textSize="17sp"
+        android:backgroundTint="@null"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/material19" />

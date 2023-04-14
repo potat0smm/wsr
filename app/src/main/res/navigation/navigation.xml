@@ -99,6 +99,9 @@
         <action
             android:id="@+id/action_byFragment2_to_bottomSheetAddress"
             app:destination="@id/bottomSheetAddress" />
+        <action
+            android:id="@+id/action_byFragment2_to_bottomSheetTime"
+            app:destination="@id/bottomSheetTime" />
     </fragment>
     <fragment
         android:id="@+id/finishFragment"
@@ -123,4 +126,9 @@
             android:id="@+id/action_checkFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetTime"
+        android:name="com.example.wsr.Buy.BottomSheetTime"
+        android:label="fragment_bottom_sheet_time"
+        tools:layout="@layout/fragment_bottom_sheet_time" />
 </navigation>
